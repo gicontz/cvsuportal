@@ -1,0 +1,15 @@
+<Files "config.ini">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+        RewriteRule ^([^\.]+)$ $1.html [NC,L]
+</IfModule>
+
+ErrorDocument 403 /cvsuportal/403.php
+ErrorDocument 404 /cvsuportal/404.php

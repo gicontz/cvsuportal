@@ -1,0 +1,121 @@
+body
+	{
+		background-image: url('../img/bg_frontpage.jpg');
+		background-size: cover; background-attachment: fixed;
+		overflow:hidden;
+	}
+
+img#DPLogo
+	{
+		width: 80%;
+		transition: 0.5s;
+
+	}
+img#DPLogo:hover
+	{
+		width: 85%;
+		transition: 0.5s;
+	}
+img#DivLine
+	{
+		width:70%;
+	}
+.LogBtn
+	{
+		border-width: 0px; width: 160px; 
+		padding-top: 10px; padding-bottom: 10px;
+		background-color:#045b56; cursor: pointer;
+		color: white; font-family: century gothic;
+		font-weight: bolder; font-size: 140%;
+	    margin-right: 20px; margin-left: 20px;
+	    transition: 0.3s;
+	}
+.LogBtn:hover
+	{
+		background-color: #0a2d2b;
+		transition-delay: : 0.3s;
+		width: 180px; transition: 0.5s;
+	}
+
+.SignBtn
+	{
+		border-width: 0px; width: 160px; 
+		padding-top: 10px; padding-bottom: 10px;
+		background-color:#086c26; cursor: pointer;
+		color: white; font-family: century gothic;  
+		font-weight: bolder; font-size: 140%;
+	    margin-right: 20px; margin-left: 20px;
+	    transition: 0.3s;
+
+	}
+.SignBtn:hover
+	{
+		background-color: #0a2d2b;
+		transition: 0.3s; width: 180px;
+	}
+.row
+	{
+		margin-top: 100px;
+	}
+.modal-title
+	{
+		font-size: 250%;
+	}
+button.btn.btn-submit
+	{
+		width: 100%; font-family: century gothic; font-size: 120%;
+		background-color: #086c26; color: white; font-weight: bolder;
+		transition: 0.3s;
+	}
+button.btn.btn-submit:hover
+	{
+		background-color: #0a2d2b;
+		transition: 0.3s;
+	}
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+
+
+@media screen and (max-width: 680px) {
+	img#DPLogo
+	{
+		width: 90%;
+	}
+img#DivLine
+	{
+		width:70%;
+	}
+   .row
+	{
+		margin-top: 170px;
+	}
+	.LogBtn
+	{
+		 margin-right: 5px; margin-left: 5px; margin-top: 10px;
+		 font-size: 110%;
+	}
+	.SignBtn
+	{
+		margin-right: 5px; margin-left: 5px; margin-top: 10px;
+		 font-size: 110%;
+	}
+}
