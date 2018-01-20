@@ -24,8 +24,6 @@
                         <a href="#">
                             <i class="fa fa-user-o"></i>
                             Profile
-
-        <?php //print_r($_SESSION['users_details']);?>
                         </a>
                     </li>
                     <li>

@@ -78,7 +78,7 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="row">
                                 <h2>Profile</h2>
-                                    <p>Professor's Name : Juan Dela Cruz</p>
+                                    <p>Professor's Name : <?php $XDLINE::getfullname($_SESSION['users_details']); ?></p>
                                     <p>Department : Department of Information Technology</p>
                              </div>
                         </div>   
@@ -334,7 +334,7 @@
                           <div class="modal-content">
                             <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Dela Cruz, Juan C.</h4>
+                              <h4 class="modal-title instructor-name">Dela Cruz, Juan C.</h4>
                             </div>
                             <div class="modal-body">
                               <div class="container-fluid">
@@ -354,7 +354,12 @@
 
                                   
                                         <script type="text/javascript">
-                                        function loadSubjectById($user_id){
+
+                                        var facultyNames = [];
+
+                                        function loadSubjectById($user_id, index){
+
+                                          $(".modal-title.instructor-name").text(facultyNames[index]);
                                           $("#subj-table tbody *").remove();  
                                           $("#subj-table").prepend('<tr><th>Course Code</th><th>Course Description</th><th>Course</th><th>Year</th><th>Section</th></tr>');                                       
                                           $.post("inc/subjects_byload.php", {
@@ -370,18 +375,22 @@
                                         }   
 
                                         function loadInstructorsByDept($user_id){
+                                          var counter = 0;
                                           $("#faculties-table tbody *").remove();  
-                                          $("#faculties-table").prepend('<tr><th>Action</th><th>Last Name</th><th>First Name</th><th>Middle Name</th><th>Ext.</th><th>Total Units</th></tr>');                                       
+                                          $("#faculties-table").prepend('<tr><th>Action</th><th>Last Name</th><th>First Name</th><th>Middle Name</th><th>Ext.</th><th>Total Units</th></tr>');
                                             $.post("inc/instructors_bydept.php", {
                                                     uid: $user_id},
                                               function(callback){   
                                               var faculties = JSON.parse(callback);   
                                                 faculties.instructors.forEach(function(item){
-                                                  $("#faculties-table tbody").append("<tr>" + "<td><button class='fa fa-user' data-toggle='modal' data-target='#modal-viewinstructor' onclick='loadSubjectById(" + item.instructor_id +")'></button></td>" + "<td>" + item.last_name +"</td>" + "<td>" + item.first_name +"</td>" + "<td>" + item.middle_name +"</td>" + "<td>" + item.extension +"</td>" + "<td>" + item.total_units +"</td>" + "</tr>");                                                
+                                                  $("#faculties-table tbody").append("<tr>" + "<td><button class='fa fa-user' data-toggle='modal' data-target='#modal-viewinstructor' onclick='loadSubjectById(" + item.instructor_id +", "+ counter +")'></button></td>" + "<td>" + item.last_name +"</td>" + "<td>" + item.first_name +"</td>" + "<td>" + item.middle_name +"</td>" + "<td>" + item.extension +"</td>" + "<td>" + item.total_units +"</td>" + "</tr>");    
+                                                  facultyNames[counter] = item.last_name + ", " + item.first_name + " " + item.middle_name.charAt(0) +".";                              
+                                                  counter++;
                                                 });
                                               }
                                             );
                                           }
+
                                         loadInstructorsByDept('<?php echo $_SESSION['users_details']['user_id'];?>');
                                         </script> 
 
