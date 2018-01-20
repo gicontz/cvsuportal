@@ -4,14 +4,14 @@ function loadSubjectById(user_id, index, ay){
 
   $(".modal-title.instructor-name").text(facultyNames[index]);
   $("#subj-table tbody *").remove();  
-  $("#subj-table").prepend('<tr><th>Course Code</th><th>Course Description</th><th>Course</th><th>Year</th><th>Section</th></tr>');                                       
+  $("#subj-table").prepend('<tr><th>Course Code</th><th>Course Description</th><th>Course</th><th>Year</th><th>Section</th><th>Mode</th></tr>');                                       
   $.post("inc/subjects_byload.php", {
     uid: user_id, 
     ay: ay},
     function(callback){   
       var subload = JSON.parse(callback);   
       subload.subjects.forEach(function(item){
-        $("#subj-table tbody").append("<tr>" + "<td>" + item.course_code +"</td>" + "<td>" + item.course_title +"</td>" + "<td>" + item.course +"</td>" + "<td>" + item.year +"</td>" + "<td>" + item.section +"</td>" + "</tr>");                                                
+        $("#subj-table tbody").append("<tr>" + "<td>" + item.course_code +"</td>" + "<td>" + item.course_title +"</td>" + "<td>" + item.course +"</td>" + "<td>" + item.year +"</td>" + "<td>" + item.section +"</td>" + "<td>" + item.mode +"</td>" +"</tr>");                                                
         $("#addLoad").attr('data-id', user_id);
       });
     }

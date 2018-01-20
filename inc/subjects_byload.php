@@ -19,7 +19,8 @@ echo '{"subjects":[';
     				echo '"course": "' . $subjloads["course"] . '", ';
     				echo '"year": "' . $subjloads["year"] . '", ';
     				echo '"section": "' . $subjloads["section"] . '", ';
-    				echo '"units": "' . $subjloads["units"] . '", ';
+                    echo '"units": "' . $subjloads["units"] . '", ';
+                    echo '"mode": "' . $subjloads["mode"] . '", ';
     				echo '"prerequisite": "' . $subjloads["prerequisite"] . '"';     		
     		echo '}';
     	}   

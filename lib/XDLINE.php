@@ -200,8 +200,8 @@ class XDLINE{
 		return $this->encode($password, $key);
 	}
 
-	private function isCanParseToInt($value){	
-			$canParsetoInt = $value != "" && $value != 0 ? ((int) $value / 2) != 0 : false;
+	public function isCanParseToInt($value){			
+			$canParsetoInt = strpos($value, '-') != "" ? false : $value != "" && $value != 0 ? ((int) $value / 2) != 0 : false;
 			return !$canParsetoInt ? "'". $value ."'" : $value;
 	}
 

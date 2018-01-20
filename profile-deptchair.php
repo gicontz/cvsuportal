@@ -334,7 +334,7 @@
                                                                                                             
                                   </table>
 
-                                    <button type="button" class="btn btn-primary" id="addLoad" data-toggle="modal" data-target="#modal-addLoad">Add Load</button>
+                                    <button type="button" class="btn btn-primary" id="addLoad" data-toggle="modal" data-target="#modal-addLoad" data-ay="<?php echo $_SESSION['users_details']['acad_year'];?>">Add Load</button>
                                     <button type="button" class="btn btn-primary" id="addAdvisory">Add Advisory Class</button>
                                   </div>
 
@@ -364,8 +364,6 @@
                               <div class="container-fluid">
                                 <div class="row">
                                   <?php include_once('inc/section_list.php');  ?>
-                                  <br/>
-                                  <button type="button" class="btn btn-primary" >Done</button>
                                 </div> 
                               </div>
                             </div>
