@@ -1,7 +1,21 @@
 <?php 
     session_start();
     if (isset($_SESSION['users_details'])) {
-      $_SESSION['users_details']['account_type'] == "instructor" ? header('Location: profile-instructor.php'): header('Location: profile-student.php');
+      $accessibility = $_SESSION['users_details']['account_type'];
+      switch ($_SESSION['users_details']['account_type']) {
+              case 'instructor':
+                header('Location: /cvsuportal/profile-instructor');
+                break;
+              case 'deptchair':
+                header('Location: /cvsuportal/profile-deptchair');
+                break;
+              case 'student':
+                header('Location: /cvsuportal/profile-student');
+                break;
+                case 'admin':
+                header('Location: /cvsuportal/profile-admin');
+                break;
+            }
     }
  ?>
  
@@ -75,9 +89,10 @@
         </div>
       </div>
     </div>
-
+</div>
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/login.js"></script>
 
 </body>
+</html>

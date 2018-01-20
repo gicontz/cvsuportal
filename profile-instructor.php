@@ -7,6 +7,23 @@
         session_start();
           getHeaderAssets();
           if(isset($_SESSION['users_details'])){
+            switch ($_SESSION['users_details']['account_type']) {
+              case 'instructor':
+                // header('Location: /cvsuportal/profile-instructor');
+                break;
+              case 'deptchair':
+                header('Location: /cvsuportal/profile-deptchair');
+                break;
+              case 'student':
+                header('Location: /cvsuportal/profile-student');
+                break;
+                case 'admin':
+                header('Location: /cvsuportal/profile-admin');
+                break;
+              default:
+                header("Location: /cvsuportal");
+                break;
+            }
         ?>        
     </head>
     <body>
@@ -282,8 +299,8 @@
 </html>
 <?php
   }
-  
+    
   else{
-    header("Location: /test/cvsuportal");
+    header("Location: /cvsuportal");
   }
 ?>  

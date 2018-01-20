@@ -7,6 +7,23 @@
         session_start();
           getHeaderAssets();
           if(isset($_SESSION['users_details'])){
+            switch ($_SESSION['users_details']['account_type']) {
+              case 'instructor':
+                header('Location: /cvsuportal/profile-instructor');
+                break;
+              case 'deptchair':
+                //header('Location: /cvsuportal/profile-deptchair');
+                break;
+              case 'student':
+                header('Location: /cvsuportal/profile-student');
+                break;
+                case 'admin':
+                header('Location: /cvsuportal/profile-admin');
+                break;
+              default:
+                header("Location: /cvsuportal");
+                break;
+            }
         ?> 
     </head>
     <body>
@@ -272,38 +289,7 @@
                 <div class="col-md-12" style="background-color: white;">
                        <h2>Faculties</h2>
                             <table class="table table-striped table-hover" id="faculties-table">
-                                <tr>
-                                    <th>Action</th>
-                                    <th>Surname</th>
-                                    <th>First Name</th>   
-                                    <th>Middle Name</th>   
-                                    <th>Ext.</th>   
-                                    <th>Total Units</th>   
-                                </tr>
-                                <tr>
-                                    <td><button class="fa fa-user" data-toggle="modal" data-target="#modal-viewinstructor" onclick="loadSubjectById(1);"></button></td>
-                                    <td>Dela Cruz</td>
-                                    <td>Juan</td>
-                                    <td>Cortez</td>
-                                    <td></td>
-                                    <td>30</td>
-                                </tr>                                
-                                <tr>
-                                    <td><button class="fa fa-user" data-toggle="modal" data-target="#modal-viewinstructor" onclick="loadSubjectById(2);"></button></td>
-                                    <td>Dela Cruz</td>
-                                    <td>Juan</td>
-                                    <td>Cortez</td>
-                                    <td>Jr</td>
-                                    <td>30</td>
-                                </tr>                                
-                                <tr>
-                                    <td><button class="fa fa-user" data-toggle="modal" data-target="#modal-viewinstructor" onclick="loadSubjectById(1);"></button></td>
-                                    <td>Dela Cruz</td>
-                                    <td>Juan</td>
-                                    <td>Cortez</td>
-                                    <td>III</td>
-                                    <td>30</td>
-                                </tr>
+                                
                              </table>
                  </div>
                 
@@ -348,50 +334,13 @@
                                                                                                             
                                   </table>
 
-                                    <button type="button" class="btn btn-primary" id="addLoad">Add Load</button>
+                                    <button type="button" class="btn btn-primary" id="addLoad" data-toggle="modal" data-target="#modal-addLoad">Add Load</button>
                                     <button type="button" class="btn btn-primary" id="addAdvisory">Add Advisory Class</button>
                                   </div>
 
-                                  
-                                        <script type="text/javascript">
-
-                                        var facultyNames = [];
-
-                                        function loadSubjectById($user_id, index){
-
-                                          $(".modal-title.instructor-name").text(facultyNames[index]);
-                                          $("#subj-table tbody *").remove();  
-                                          $("#subj-table").prepend('<tr><th>Course Code</th><th>Course Description</th><th>Course</th><th>Year</th><th>Section</th></tr>');                                       
-                                          $.post("inc/subjects_byload.php", {
-                                                  uid: $user_id, 
-                                                  ay: '<?php echo $_SESSION['users_details']['acad_year'];?>'},
-                                            function(callback){   
-                                            var subload = JSON.parse(callback);   
-                                              subload.subjects.forEach(function(item){
-                                                $("#subj-table tbody").append("<tr>" + "<td>" + item.course_code +"</td>" + "<td>" + item.course_title +"</td>" + "<td>" + item.course +"</td>" + "<td>" + item.year +"</td>" + "<td>" + item.section +"</td>" + "</tr>");                                                
-                                              });
-                                            }
-                                          );
-                                        }   
-
-                                        function loadInstructorsByDept($user_id){
-                                          var counter = 0;
-                                          $("#faculties-table tbody *").remove();  
-                                          $("#faculties-table").prepend('<tr><th>Action</th><th>Last Name</th><th>First Name</th><th>Middle Name</th><th>Ext.</th><th>Total Units</th></tr>');
-                                            $.post("inc/instructors_bydept.php", {
-                                                    uid: $user_id},
-                                              function(callback){   
-                                              var faculties = JSON.parse(callback);   
-                                                faculties.instructors.forEach(function(item){
-                                                  $("#faculties-table tbody").append("<tr>" + "<td><button class='fa fa-user' data-toggle='modal' data-target='#modal-viewinstructor' onclick='loadSubjectById(" + item.instructor_id +", "+ counter +")'></button></td>" + "<td>" + item.last_name +"</td>" + "<td>" + item.first_name +"</td>" + "<td>" + item.middle_name +"</td>" + "<td>" + item.extension +"</td>" + "<td>" + item.total_units +"</td>" + "</tr>");    
-                                                  facultyNames[counter] = item.last_name + ", " + item.first_name + " " + item.middle_name.charAt(0) +".";                              
-                                                  counter++;
-                                                });
-                                              }
-                                            );
-                                          }
-
-                                        loadInstructorsByDept('<?php echo $_SESSION['users_details']['user_id'];?>');
+                                      <script type="text/javascript" src="js/faculty_load.js"></script>
+                                        <script type="text/javascript">                                
+                                        loadInstructorsByDept('<?php echo $_SESSION['users_details']['user_id'];?>', '<?php echo $_SESSION['users_details']['acad_year'];?>');
                                         </script> 
 
                                  </div> 
@@ -403,6 +352,29 @@
                           </div>
                         </div>
                       </div>
+
+              <div class="modal fade" id="modal-addLoad" role="dialog" style="overflow-y: hidden;">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Add Load</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="row">
+                                  <?php include_once('inc/section_list.php');  ?>
+                                  <br/>
+                                  <button type="button" class="btn btn-primary" >Done</button>
+                                </div> 
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal">Back</button>
+                            </div>
+                          </div>
+                        </div>
+              </div>
 
                  <?php 
                  getFooterContents();
@@ -422,8 +394,8 @@
 
 <?php
   }
-  
+    
   else{
-    header("Location: /test/cvsuportal");
+    header("Location: /cvsuportal");
   }
 ?>  

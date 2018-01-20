@@ -3,7 +3,27 @@ include_once('XDLINE.php');
 
 class Subjects extends XDLINE{
 	
-	public function loadSubject($instructorId, $subjId, $sectionId, $configfile){
+	public function loadSubjectbyInstructor($instructorId, $subjId, $sectionId, $configfile){
+		return parent::insert("subjloads_table", array(
+			'instructor_id' => $instructorId,
+			'subj_id' => $subjId,
+			'section_id' => $sectionId
+		), "Subject Successfully Loaded!", "Subject Cannot Load to the Instructor, Try Again!", $configfile);
+	}
+
+	public function showSections($configfile){
+		return parent::select("sections_table.course_id, section_id, course_main_title, year, section", "sections_table, courses_table", "", $configfile);
+	}
+
+	public function showCourses($configfile){
+		return parent::select("course_id, course_main_title", "courses_table", "", $configfile);
+	}
+
+	public function showSubjects($configfile){
+		return parent::select("course_id, subj_id, course_code, course_title", "subjects_table", "", $configfile);
+	}
+
+	public function loadSubjectbyStudent($student_number, $subjId, $sectionId, $configfile){
 		return parent::insert("subjloads_table", array(
 			'instructor_id' => $instructorId,
 			'subj_id' => $subjId,
