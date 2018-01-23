@@ -33,11 +33,15 @@ class Subjects extends XDLINE{
 		), "Subject Successfully Loaded!", "Subject Cannot Load to the Instructor, Try Again!", $configfile);
 	}
 
+	public function removeLoad($subjload_id, $configfile){
+		return parent::delete("subjloads_table", "subjload_id = $subjload_id", "Subject Load Removed!", "Subject Load Wasn't Removed, Try Again!", $configfile);
+	}
+
 	public function showSubjectLoad($instructorId, $ay, $configfile){
 		$data = array();
 
 		if($instructorId != "") :
-		$data = parent::select("course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
+		$data = parent::select("subjload_id, course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
 				inner join subjloads_table on subjects_table.subj_id = subjloads_table.subj_id
 				inner join sections_table on sections_table.section_id = subjloads_table.section_id
 				inner join courses_table on sections_table.course_id = courses_table.course_id", 

@@ -14,7 +14,8 @@ echo '{"subjects":[';
     		}
     		$ctr++;
     		echo '{';    		
-    				echo '"course_code": "' . $subjloads["course_code"] . '", ';
+                    echo '"subjload_id": "' . $subjloads["subjload_id"] . '", ';
+                    echo '"course_code": "' . $subjloads["course_code"] . '", ';
     				echo '"course_title": "' . $subjloads["course_title"] . '", ';
     				echo '"course": "' . $subjloads["course"] . '", ';
     				echo '"year": "' . $subjloads["year"] . '", ';

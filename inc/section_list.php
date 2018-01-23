@@ -4,8 +4,8 @@ include_once('functions.php');
 $courses  = $subjectClass->showCourses("config.ini");
 ?>
 
-<label>Course: </label>
-<select id="courses">
+<div class="form-group">
+<select id="courses" class="form-control input-sm">
 	<option value="" default>Choose Course</option>
 	<?php 
 	foreach($courses as $course){ ?>
@@ -14,16 +14,17 @@ $courses  = $subjectClass->showCourses("config.ini");
 }
 ?>        
 </select>
-<br/>
+</div>
 
-<label>Section: </label>
-<select id="sections">
+<div class="form-group">
+<select id="sections" class="form-control input-sm">
 	<option value="" default>Choose Section</option>
 
 </select>
-<br/>
-<label>Subject: </label>
-<select id="subjects">
+</div>
+
+<div class="form-group">
+<select id="subjects" class="form-control input-sm">
 	<option value="" default>Choose Subject</option>
 	<?php 
 	foreach($subjects as $subject){ ?>
@@ -32,15 +33,16 @@ $courses  = $subjectClass->showCourses("config.ini");
 }
 ?>        
 </select>
-<br/>
-<label>Mode: </label>
-<select id="mode">
+</div>
+
+<div class="form-group">
+<select id="mode" class="form-control input-sm">
 	<option value="" default>Choose Mode</option>
 	<option value="LEC" default>LEC</option>
 	<option value="LAB" default>LAB</option>
 	<option value="LEC/LAB" default>LEC/LAB</option>
 </select>
-<br/>
+</div>
 <button type="button" class="btn btn-primary" id="btn-addload">Done</button>
 
 <!-- Script to filter details below by Course -->

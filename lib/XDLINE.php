@@ -1,11 +1,12 @@
 <?php 
-/*================================================================================
-Plugin Name: XDLINE CRUD
-Authors: Gimel C. Contillo, Erwin O. Hayag
-Organization: Cross Developers League
-Author URI: 
-Plugin URI:
-Version: 0.9
+/**
+* Plugin Name: XDLINE CRUD
+* Authors: Gimel C. Contillo, Erwin O. Hayag
+* Organization: Cross Developers League
+* Author URI: 
+* Plugin URI:
+* Version: 0.9
+* @author XDLine CvSU Silang
 
 Table of Contents
 # CONNECTION
@@ -16,7 +17,7 @@ Table of Contents
 # INSERT FUNCTION
 	## REGISTER ACCOUNT
 	## ACCOUNT INFO
-==============================================================================*/
+*/
 
 class XDLINE{
 
@@ -27,9 +28,12 @@ class XDLINE{
 	public function getskey(){
 		return $this->skey;
 	}
-	/*======================
-	# CONNECTION
-	=======================*/
+
+	/**
+	* # CONNECTION
+	* @param string $ini_file_dir Directory of Configuration File
+	* @return mysqli Connection to the MySQL
+	*/
 
 	private function xdline_connect($ini_file_dir = "../config.ini"){
 		$xdl_db_settings = parse_ini_file($ini_file_dir, true);
@@ -44,21 +48,13 @@ class XDLINE{
 	}
 
 
-	/*======================
-	# READ FUNCTION
-
-	*************************** SAMPLE SELECT SYNTAX **********************************
-	$toSelect = "*";
-	$from = "`inserttest`";
-	$where = "`id` = 16 OR `id` = 17";
-	$result = select($conn, $toSelect, $from, $where);
-	while($row = $result->fetch_assoc()) { 
-		foreach ($row as $key => $value) {
-			echo "<br> Key: ".$key." Value: ".$value;
-		}
-	}
-	*************************** SAMPLE SELECT SYNTAX **********************************
-	=======================*/
+	/**
+	* # READ FUNCTION
+	* @param string $select Columns to be Selected ( * if all columns is selected) 
+	* @param string $from Table Name
+	* @param string $where SQL Condition ("" if no condition)
+	* @param string $ini_file_dir Directory of Configuration File
+	*/
 
 
 	public static function select($select, $from, $where, $ini_file_dir = "../config.ini"){	
@@ -80,24 +76,24 @@ class XDLINE{
 	}
 
 
-	/*======================
-	## CHECK ACCOUNT
-	=======================*/
+	/**
+	* ## CHECK ACCOUNT
+	* @param string $username Username to be checked
+	*/
 
 	private function isUsernameExist($username){
 		return self::select("username", $this->accounts_table, "username = '$username'") != null;
 	}
 
-	/*======================
-	# DELETE FUNCTION
-
-	*************************** SAMPLE DELETE SYNTAX **********************************
-	$tableName = "inserttest";
-	delete($conn, $tableName, 'id', 25);
-	*************************** SAMPLE DELETE SYNTAX **********************************
-	=======================*/
-
-
+	/**
+	* # DELETE FUNCTION
+	* @param string $tableName Table Name/s
+	* @param string $whereStatement SQL Condition
+	* @param string $success_message Prompt if success
+	* @param string $error_message Prompt if error
+	* @param string $ini_file_dir Directory of Configuration File
+	* @return string Either $success_message or $error_message
+	*/
 
 	public static function delete($tableName, $whereStatement, 
 		$success_message = "Deleted Successfully", $error_message = "Cannot Delete Row", $ini_file_dir = "../config.ini"){
@@ -111,19 +107,16 @@ class XDLINE{
 
 
 
-	/*======================
-	# UPDATE FUNCTION
-
-	*************************** SAMPLE UPDATE SYNTAX **********************************
-	$tableName = "inserttest";
-	$arrayTest = array(
-		'fname' => "'Erwin'",
-		'lname' => "'Hayag'",
-		'facebook' => "'facebook/hayagerwin'"
-	);
-	update($conn, $tableName, $arrayTest, 'id', 1);
-	*************************** SAMPLE UPDATE SYNTAX **********************************
-	=======================*/
+	/**
+	* # UPDATE FUNCTION
+	* @param string $tableName Table Name/s
+	* @param associative array $updateArray Array of the column_name => value
+	* @param string $whereStatement SQL Condition
+	* @param string $success_message Prompt if success
+	* @param string $error_message Prompt if error
+	* @param string $ini_file_dir Directory of Configuration File
+	* @return string Either $success_message or $error_message
+	*/
 
 
 	public static function update($tableName, $updateArray, $whereStatement, 
@@ -142,19 +135,16 @@ class XDLINE{
 		return $out;
 	}
 
-	/*======================
-	# INSERT FUNCTION
-
-	*************************** SAMPLE INSERT SYNTAX **********************************
-	$tableName = "inserttest";
-	$arrayTest = array(
-		'fname' => "'Winner'",
-		'lname' => "'Yayyyy'",
-		'facebook' => "'zwww.facebook.com/hayagerwins'"
-	);
-	insert($conn, $tableName, $arrayTest);
-	*************************** SAMPLE INSERT SYNTAX **********************************
-	=======================*/
+	/**
+	* # INSERT FUNCTION
+	* @param string $tableName Table Name/s
+	* @param associative array $insertArray Array of the column_name => value
+	* @param string $whereStatement SQL Condition
+	* @param string $success_message Prompt if success
+	* @param string $error_message Prompt if error
+	* @param string $ini_file_dir Directory of Configuration File
+	* @return string Either $success_message or $error_message
+	*/
 
 	public static function insert($tableName, $insertArray,
 		$success_message = "Inserted Successfully", $error_message = "Cannot Insert Row", $ini_file_dir = "../config.ini"){
@@ -173,9 +163,13 @@ class XDLINE{
 		return $out;
 	}
 
-	/*======================
-	## REGISTER ACCOUNT
-	=======================*/
+	/**
+	* ## REGISTER ACCOUNT
+	* @param string $username Username
+	* @param string $password Password
+	* @param string $accessibility Accessibility
+	* @return string Status of Registration
+	*/
 
 	public function register_account($username, $password, $accessibility){
 		$key = $password . $this->skey;
@@ -200,18 +194,18 @@ class XDLINE{
 		return $this->encode($password, $key);
 	}
 
-	public function isCanParseToInt($value){			
+	private function isCanParseToInt($value){			
 			$canParsetoInt = strpos($value, '-') != "" ? false : $value != "" && $value != 0 ? ((int) $value / 2) != 0 : false;
 			return !$canParsetoInt ? "'". $value ."'" : $value;
 	}
 
-    public  function safe_b64encode($string) {
+    private  function safe_b64encode($string) {
     	$data = base64_encode($string);
     	$data = str_replace(array('+','/','='),array('-','_',''),$data);
     	return $data;
     }
 
-    public function safe_b64decode($string) {
+    private function safe_b64decode($string) {
     	$data = str_replace(array('-','_'),array('+','/'),$string);
     	$mod4 = strlen($data) % 4;
     	if ($mod4) {
