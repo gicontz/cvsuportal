@@ -76,14 +76,15 @@
             </div>
           </div>
           <div class="col-md-9 col-xs-9"><br>
-            <li class="dropdown pull-right" style="list-style: none">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account&nbsp;&nbsp;
+            <div class="dropdown show pull-right" style="list-style: none">
+              <a class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" href="#">Account&nbsp;&nbsp;
                <span class="fa fa-angle-down"></span></a>
-               <ul class="dropdown-menu">
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a href="#" class="nav-text"><i class="fa fa-gear"></i> Settings</a></li>
                 <li><a href="lib/logout" class="nav-text"><i class="fa fa-sign-out"></i> Logout</a></li>
               </ul>
             </div>
+          </div>
             <div class="col-md-12 col-xs-12">
               <div class="row">
                 <h2>Profile</h2>
@@ -260,9 +261,6 @@
   ?>            
 </div>
 </div>
-
-<script src = "js/jquery.min.js"></script>
-<script src = "js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function () {
