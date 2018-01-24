@@ -82,6 +82,7 @@
                 <div class="col-sm-offset-1 col-sm-10">
                   <button type="submit" class="btn btn-submit" id="btn-login-login">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp Log in</button>
+                    <img width="100%" height="25px" src="img/loading.gif" id="login-loading">
                 </div>
               </div>
 

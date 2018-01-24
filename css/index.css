@@ -119,3 +119,7 @@ img#DivLine
 		 font-size: 110%;
 	}
 }
+
+#login-loading {
+	display: none;
+}
