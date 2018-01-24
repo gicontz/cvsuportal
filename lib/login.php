@@ -19,7 +19,7 @@ function login($username, $password){
 		session_destroy();
 	}else {
 		$_SESSION['users_details'] = $users_details;
-		echo "GOTO PROFILE";
+		echo "GOTO PROFILE " . $_SESSION['users_details']['account_type'];
 	}
 };
 
