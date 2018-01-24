@@ -167,8 +167,16 @@ a, a:hover, a:focus {
     font-family: cetury gothic;
 }
 
+/**
+* Table Responsive
+*/
 
-
+#subj-table-container {
+    max-height: 300px;
+    display: block;
+    position: relative;
+    overflow-y: scroll;
+}
 
 
 

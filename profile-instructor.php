@@ -87,7 +87,7 @@
             <div class="col-md-12 col-xs-12">
               <div class="row">
                 <h2>Profile</h2>
-                <p>Professor's Name : Juan Dela Cruz</p>
+                <p>Professor's Name : <?php $XDLINE::getfullname($_SESSION['users_details']); ?></p>
                 <p>Department : Department of Information Technology</p>
               </div>
             </div>   
@@ -102,7 +102,7 @@
                 <h4 class="modal-title">DCIT65 - Web Developnent</h4>
               </div>
               <div class="modal-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive">
                   <tr><br>
                     <th>Action</th>
                     <th>Course</th>
@@ -159,35 +159,14 @@
        
        <div class="col-md-12" style="background-color: white;">
          <h2>Subject</h2>
-         <table class="table table-striped table-hover">
-          <tr>
-            <th>Action</th>
-            <th>Course Code</th>
-            <th>Course Title</th>
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>DCIT65</td>
-            <td>Web Development</td>
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>DCIT50</td>
-            <td>Object Oriented Programming</td>
-
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>COSC70</td>
-            <td>Database Systems</td>
-
-          </tr>
+         <table class="table table-striped table-hover table-responsive table-responsive">
+          <?php include_once('inc/subjectload_perinstructor.php'); ?>
         </table>
       </div><br><br>
 
       <div class="col-md-12" style="background-color: white;">
        <h2>Advisory</h2>
-       <table class="table table-striped table-hover">
+       <table class="table table-striped table-hover table-responsive table-responsive">
         <tr>
           <th>Action</th>
           <th>Course</th>

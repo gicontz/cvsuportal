@@ -111,7 +111,7 @@
                 <h4 class="modal-title">DCIT 65 - Web Developnent</h4>
               </div>
               <div class="modal-body">
-                <table class="table table-striped">
+                <table class="table table-striped table-responsive">
                   <tr><br>
                     <th>Action</th>
                     <th>Course</th>
@@ -167,36 +167,15 @@
 
        <div class="col-md-12" style="background-color: white;">
          <h2>Subject</h2>
-         <table class="table table-striped table-hover">
-          <tr>
-            <th>Action</th>
-            <th>Course Code</th>
-            <th>Course Title</th>
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>DCIT65</td>
-            <td>Web Development</td>
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>DCIT50</td>
-            <td>Object Oriented Programming</td>
-
-          </tr>
-          <tr>
-            <td><button class="fa fa-pencil-square-o" data-toggle="modal" data-target="#modal"></button></td>
-            <td>COSC70</td>
-            <td>Database Systems</td>
-
-          </tr>
+         <table class="table table-striped table-hover table-responsive">
+          <?php include_once('inc/subjectload_perinstructor.php'); ?>
         </table>
 
       </div><br><br>
 
       <div class="col-md-12" style="background-color: white;">
        <h2>Advisory</h2>
-       <table class="table table-striped table-hover">
+       <table class="table table-striped table-hover table-responsive">
         <tr>
           <th>Action</th>
           <th>Course</th>
@@ -356,7 +335,7 @@
 
   <div class="col-md-12" style="background-color: white;">
    <h2>Faculties</h2>
-   <table class="table table-striped table-hover" id="faculties-table">
+   <table class="table table-striped table-hover table-responsive" id="faculties-table">
 
    </table>
  </div>
@@ -396,9 +375,9 @@
             <div class="col-md-2 col-sm-2 col-xs-2 text-center center-block">
               <a href="" data-toggle="modal" data-target="#modal-viewStudent"><img src="img/sample.jpg" data-dismiss ="modal" id="view-class" class="img-circle"></a>
             </div>
-            <div class="col-md-10 col-sm-10 col-xs-10 text-center center-block">   
+            <div class="col-md-10 col-sm-10 col-xs-10 text-center center-block" id="subj-table-container">   
 
-              <table class="table table-striped table-hover" id="subj-table"> 
+              <table class="table table-striped table-hover table-responsive" id="subj-table"> 
 
               </table>
 

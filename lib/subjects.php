@@ -51,6 +51,17 @@ class Subjects extends XDLINE{
 		return $data;
 	}
 
+	public function showSubjectsofInstructor($instructorId, $configfile){
+		$data = array();
+
+		if($instructorId != "") :
+		$data = parent::select("instructor_id, subjects_table.subj_id, section_id, course_code, course_title", "subjloads_table join subjects_table on subjects_table.subj_id = subjloads_table.subj_id", 
+				"instructor_id = $instructorId GROUP BY subj_id", $configfile);
+		endif;
+
+		return $data;		
+	}
+
 	public function getInstructorId($userId, $configfile){
 		return parent::select("instructor_id", "instructors_table", "user_id = $userId", $configfile)[0]["instructor_id"];
 	}
