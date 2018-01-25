@@ -23,7 +23,7 @@ class XDLINE{
 
 	private $accounts_table = "inserttest";
 
-	public $skey = "17"; // you can change it
+	public $skey = "XDevelopersLeagueDITPortalCvSUSc"; // you can change it
 
 	public function getskey(){
 		return $this->skey;
@@ -172,7 +172,8 @@ class XDLINE{
 	*/
 
 	public function register_account($username, $password, $accessibility){
-		$key = $password . $this->skey;
+		$temporary_salt = $password.$this->skey;
+		$key = substr($temporary_salt, 0, 32);
 		if(!self::isUsernameExist($username)){
 			$password = $this->encode($password, $key);
 			return self::insert($this->accounts_table, array(
@@ -185,12 +186,14 @@ class XDLINE{
 	}
 
 	public function decrypt_password($value, $password){
-		$key = $password . $this->skey;
+		$temporary_salt = $password.$this->skey;
+		$key = substr($temporary_salt, 0, 32);
 		return $this->decode($value, $key);
 	}
 
 	public function encrypt_password($password){
-		$key = $password . $this->skey;
+		$temporary_salt = $password.$this->skey;
+		$key = substr($temporary_salt, 0, 32);
 		return $this->encode($password, $key);
 	}
 
