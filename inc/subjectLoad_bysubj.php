@@ -25,7 +25,7 @@ if($instructorSubjects[0] != "") :
 	foreach($instructorSubjects as $subject){
 	?>
 	<tr>
-		<td><a class="fa fa-pencil manage_section"  data-toggle="modal" data-target="#modal-addhomework" title="Add Work" data-dismiss="modal"  title="Manage" data-target="#modalsections_subject" href="javascript:void(0);" data-href="<?php echo 'inc/manage_section.php?sectId=' . $subject['section_id'] . '&course_main_title=' . str_replace(' ', '%20', $subject['course_main_title']) . '&year=' . $subject['year'] . '&section=' . $subject['section']; ?>" href="javascript:void(0);"></a></td>
+		<td><a class="fa fa-pencil manage_section"  data-toggle="modal" data-target="#modal-addhomework" title="Add Work" data-dismiss="modal"  title="Manage" data-target="#modalsections_subject" href="javascript:void(0);" data-href="<?php echo 'inc/manage_section.php?sectId=' . $subject['section_id'] . '&course_main_title=' . str_replace(' ', '%20', $subject['course_main_title']) . '&year=' . $subject['year'] . '&section=' . $subject['section'] . '&subjId=' . $subjid; ?>" href="javascript:void(0);"></a></td>
 		<td><?php echo $subject['course_main_title']; ?></td>
 		<td><?php echo $subject['year'] . $subject['section']; ?></td>
 	</tr>

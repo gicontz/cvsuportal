@@ -19,10 +19,12 @@ function getHeaderAssets(){
         <link rel="stylesheet" href="css/profile.css">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <link rel="stylesheet" href="css/profile-deptchar.css">
+        <link rel="stylesheet" href="css/style.css">
 
         <script src = "js/jquery.min.js"></script>
         <script src = "js/bootstrap.min.js"></script>
 	<?php
+	include_once('inc/session_checker.php');
 }
 
 function getFooterContents(){
