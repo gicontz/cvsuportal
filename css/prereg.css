@@ -1,0 +1,222 @@
+div{
+    transition: all 0.5s ease;
+}
+body{
+    background: #ffffff;
+    background-size: cover;
+    overflow-x: hidden;
+    background-attachment: fixed;
+    font-family: 'Calibri';
+    color: #000000;
+}
+.container{
+    max-width: 864px;
+}
+.logo {
+    max-height: 75px;
+    display: block;
+    margin: 20px auto;
+}
+.header_title {
+    text-align: center;
+}
+.header_title{
+    font-family: 'Cambria', sans-serif;
+}
+.header_title h1{
+    font-size: 24px;
+    font-weight: 600;
+}
+.header_title h4 {
+    font-size: 21px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+.header_title h2{
+    font-size: 24px;
+    font-weight: 600;
+}
+.header_title h6{
+    font-size: 21px;
+    font-weight: 600;
+    font-family: Calibri, sans-serif;
+}
+.input_types{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    text-align: center;
+}
+.input_types:focus, .input_types:active {
+    outline-color: transparent;
+}
+.input_types.width-50 {
+    width: 50px;
+}
+.input_types.width-80 {
+    width: 80px;
+}
+.input_types.width-200 {
+    width: 200px;
+}
+.input_types.width-300 {
+    width: 300px;
+}
+.input_types.width-100p {
+    width: 100%;
+}
+.first_par .tab {
+    padding-left: 40px;
+}
+.first_par p {
+    margin-bottom: 0;
+}
+.grades_table, .subjLoad_table{
+    margin-top: 20px;
+}
+.grades_table td, .grades_table th, .subjLoad_table td, .subjLoad_table th{
+    text-align: center;
+}
+.grades_table .input_types, .subjLoad_table .input_types{
+    border: none;
+}
+.grades_table .table-adder, .subjLoad_table .table-adder{
+    cursor: pointer;
+    position: absolute;
+}
+.grades_table p, .subjLoad_table p {
+    padding-left: 15px;
+}
+.table-adder .plus, .table-adder .minus {
+    background: #8dc460;
+    padding: 0 5px;
+    margin-right: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+.table-adder{
+    margin-left: -15px;    
+}
+p.registrar {
+    margin-left: 45px;
+}
+.signatures-1, .signatures-2{
+    margin-top: 20px;
+}
+.gpa_text {
+    text-align: right !important;
+    font-weight: 600;
+}
+.table-adder-for-gpa {
+    float: right;
+    background: #8dc460;
+    padding-right: 10px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.inline p {
+    display: inline-block;
+}
+.name p{
+    width: 30%;    
+}
+.inline {
+    text-align: left;
+    font-family: Calibri, sans-serif;
+}
+.name p:first-of-type .input_types {
+    width: 80%;
+}
+.name p:first-of-type {
+    width: 65%;
+}
+.fw_field p{
+    width: 100%;    
+}
+.ff2 .full_label{
+    width: 15%;
+}
+.ff2 .full_input {
+    width: 85%;
+}
+.full_label {
+    width: 6%;
+}
+.full_input {
+    width: 94%;
+}
+.inline p span {
+    display: inline-block;
+}
+.input_types.check {
+    margin-left: 30px;
+    margin-right: 5px;
+    position: relative;
+}
+.input_types.check:before {
+    content: '\f096';
+    background: #ffffff;
+    font-family: FontAwesome;
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    font-size: 17px;
+}
+.input_types.check:checked:before {
+    content: '\f046';
+    font-size: 17px;
+}
+.hr-line {
+    border-top: 1.5px dashed #000000;
+}
+body{
+    max-height: 1056px;
+}
+.table-adder .plus:before {
+    content: '\f067';
+    font-family: FontAwesome;
+}
+.table-adder .minus:before {
+    content: '\f068';
+    font-family: FontAwesome;
+}
+@media print{
+    .col-md-3, .col-md-6{
+        float: left;
+    }
+    .row.header{
+        margin: 0 auto;
+    }
+    .row.header {
+        position: absolute;
+        width: 100%;
+        max-width: 864px;
+        top: 0;
+        left: 50%;
+        margin: 0 0 0 -270px;
+    }
+    .file_title{
+        margin-top: 100px;
+    }
+    .col-md-offset-9{
+        margin-left: 75%;
+    }
+    .grades_table .table-adder, .subjLoad_table .table-adder, .table-adder-for-gpa {
+        display: none;
+    }
+    .signatures-1, .signatures-2{
+        /*margin-left: 30px;*/
+    }
+    .signatures-1 > div, .signatures-2 > div{
+        margin-left: 100px;
+    }
+    #main-footer{
+        display: none;
+    }
+    hr{
+        display: none;
+    }
+    .hr-line{
+        margin-bottom: -87px;
+    }
+}

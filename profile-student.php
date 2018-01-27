@@ -2,20 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DIT Portal | <?php echo $instructors_page_title; ?></title>
+  <title>DIT Portal | <?php echo $students_page_title; ?></title>
   <?php
   session_start();
   getHeaderAssets();
   if(isset($_SESSION['users_details'])){
     switch ($_SESSION['users_details']['account_type']) {
       case 'instructor':
-                // header('Location: /cvsuportal/profile-instructor');
+      header('Location: /cvsuportal/profile-instructor');
       break;
       case 'deptchair':
       header('Location: /cvsuportal/profile-deptchair');
       break;
       case 'student':
-      header('Location: /cvsuportal/profile-student');
+      //header('Location: /cvsuportal/profile-student');
       break;
       case 'admin':
       header('Location: /cvsuportal/profile-admin');
@@ -30,12 +30,14 @@
     <div class="wrapper">
       <nav id="sidebar">
        <?php 
-       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-hand-grab-o"];
+       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-edit", "fa-book", "fa-book"];
        ___user_navigation("img/sample.jpg", array(
           'Profile' => "#profile",
           'Subjects' => "#",
           'Schedule' => "#",
-          'Advisory' => "#"
+          'Pre-Reg' => "#",
+          'COG' => "#",
+          'Checklist' => "#"
         ), $navicons);
         ?>
       </nav>
@@ -73,7 +75,6 @@
         </div>
       </nav>
 
-      <!-- Popup Modal View Subject -->
       <div class="modal fade" id="modalsections_subject" role="dialog" style="overflow-y: hidden;">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -89,7 +90,21 @@
       <div class="modal fade" id="modal-addhomework" role="dialog" style="overflow-y: hidden;">
         <div class="modal-dialog">
           <div class="modal-content">
-            
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">BS Computer Science - 3A</h4>
+            </div>
+            <div class="modal-body"><br><br>
+              <button  class="btn btn-default">Add homework</button>
+              <button class="btn btn-default">Add Project</button>
+              <button class="btn btn-default">Upload Grades</button>
+
+
+            </div>
+            <div class="modal-footer">
+             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" data-dismiss="modal">Back</button>
+             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+           </div>
          </div>
        </div>
      </div>
