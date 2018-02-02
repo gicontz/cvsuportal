@@ -12,10 +12,17 @@ body{
 .container{
     max-width: 864px;
 }
+#content{
+    width: 100%;
+    max-width: 100%;
+}
 .logo {
     max-height: 75px;
     display: block;
     margin: 20px auto;
+}
+img.cvsu.logo {
+    float: right;
 }
 .header_title {
     text-align: center;
@@ -218,5 +225,8 @@ body{
     }
     .hr-line{
         margin-bottom: -87px;
+    }
+    footer{
+        display: none;
     }
 }

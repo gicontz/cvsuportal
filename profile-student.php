@@ -4,6 +4,10 @@
 <head>
   <title>DIT Portal | <?php echo $students_page_title; ?></title>
   <?php
+  $pager = "";
+  if(isset($_REQUEST['content'])) :
+    $pager = $_REQUEST['content'];
+  endif;
   session_start();
   getHeaderAssets();
   if(isset($_SESSION['users_details'])){
@@ -30,18 +34,24 @@
     <div class="wrapper">
       <nav id="sidebar">
        <?php 
-       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-edit", "fa-book", "fa-book"];
+       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-file", "fa-certificate", "fa-book"];
        ___user_navigation("img/sample.jpg", array(
-          'Profile' => "#profile",
+          'Profile' => "profile-student",
           'Subjects' => "#",
           'Schedule' => "#",
-          'Pre-Reg' => "#",
+          'Pre-Reg' => "?content=prereg",
           'COG' => "#",
           'Checklist' => "#"
         ), $navicons);
         ?>
       </nav>
       <div id="content">
+
+        <?php if($pager == 'prereg') {
+          ___student_prereg();
+        }
+          else{
+        ?>
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="col-md-3 col-xs-3">
@@ -68,7 +78,7 @@
           <div class="col-md-12 col-xs-12">
             <div class="row">
               <h2>Profile</h2>
-              <p>Professor's Name : <?php $XDLINE::getfullname($_SESSION['users_details']); ?></p>
+              <p>Student's Name : <?php $XDLINE::getfullname($_SESSION['users_details']); ?></p>
               <p>Department : Department of Information Technology</p>
             </div>
           </div>   
@@ -209,6 +219,7 @@
 </div>        
 
 <?php 
+}
 getFooterContents();
 ?>            
 </div>

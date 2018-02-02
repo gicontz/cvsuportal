@@ -17,7 +17,8 @@ $.extend({
 	    	var gpa = 0;
 	    	prod_grade[0] = "";
 
-	    	var total_units = 0;	    	
+	    	var total_units = 0;
+	    	var main_total_units = 0;	    	
 
 	    	for(var sub = 1; sub <= limit; sub++){
 	    		var invalid_coursecode = false;
@@ -30,6 +31,8 @@ $.extend({
 	    			total_prodgrade += prod_grade[sub];
 	    			total_units += parseInt($(".input_types[name='subj"+ sub +"-u']").val());
 		    	}	
+
+	    		main_total_units += parseInt($(".input_types[name='subj"+ sub +"-u']").val());
 	    		console.log(each_coursecode[sub]);
 	    	}
 
@@ -38,7 +41,7 @@ $.extend({
 	    	gpa = gpa.toFixed(2);
 
 	    	if (i==1) {
-	    		$(target_table).append('<tr id="gpa-row"><td></td><td class="gpa_text">GPA: </td><td class="gpa">'+ gpa +'</td><td class="total-units">'+ total_units +'</td></tr>');
+	    		$(target_table).append('<tr id="gpa-row"><td></td><td class="gpa_text">GPA: </td><td class="gpa">'+ gpa +'</td><td class="total-units">'+ main_total_units +'</td></tr>');
 	    	}else if(i==0){
 	    		$("#gpa-row").remove();
 	    	}	  
@@ -63,6 +66,8 @@ $(".grades_table .table-adder .plus").click(function(){
 		$.giriTablePlus(".grades_table table", ++index);
 	}			
 });
+
+index = $(".grades_table tr").length - 1;
 
 $(".grades_table .table-adder .minus").click(function(){
 	// console.log(index);

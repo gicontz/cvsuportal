@@ -1,14 +1,17 @@
+<?php
+global $studentClass;
+$student_number = $studentClass->getStudentNumber($_SESSION['users_details']['user_id'], 'config.ini');
+$name = getproperfullname($_SESSION['users_details']);
+?>
+
 <div class="container">
 	<div class="row header">
 		<div class="col-md-3">
-			<img src="image/cvsu.jpg" class="cvsu logo">
+			<img src="img/cvsu.jpg" class="cvsu logo">
 		</div>
 		<div class="col-md-6 header_title">
 			<h1>CAVITE STATE UNIVERSITY<br/>SILANG CAMPUS</h1>
 			<h4>Biga I, Silang, Cavite</h4>
-		</div>
-		<div class="col-md-3">
-			<img src="image/silang.jpg" class="silang logo">			
 		</div>
 	</div><!-- page_header -->
 
@@ -29,7 +32,7 @@
 			<p>TO WHOM IT MAY CONCERN: </p>
 		</div>
 		<div class="col-md-12">
-			<p class="tab">This is to certify that <strong><input type="text" name="name" class="input_types width-300"> (Student No. <input type="text" name="sn-num" class="input_types width-80">)</strong> obtained the following grades </p><p>during <strong><input type="text" name="semester" class="input_types width-50"> semester</strong> of <strong>A.Y. <input type="text" name="ay" class="input_types width-80"></strong></p>
+			<p class="tab">This is to certify that <strong><input type="text" name="name" class="input_types width-300" value="<?php echo $name; ?>"> (Student No. <input type="text" name="sn-num" class="input_types width-80" value="<?php echo $student_number; ?>">)</strong> obtained the following grades </p><p>during <strong><input type="text" name="semester" class="input_types width-50" value="<?php echo $_SESSION['users_details']['semester'];?>"> semester</strong> of <strong>A.Y. <input type="text" name="ay" class="input_types width-80" value="<?php echo $_SESSION['users_details']['acad_year'];?>"></strong></p>
 		</div>
 	</div><!-- first_par -->
 
@@ -41,9 +44,11 @@
 					<th>SUBJECT CODE</th>
 					<th>GRADE</th>
 					<th>UNIT</th>
-				</tr>				
+				</tr>	
+				<?php $studentClass->tabulateGrades($student_number, array(
+					'acad_year' => $_SESSION['users_details']['acad_year'],
+					'semester' => $_SESSION['users_details']['semester']), "config.ini"); ?>			
 			</table>
-			<p class="table-adder"><span class="plus"></span><span class="minus"></span></p>
 			<p class="table-adder-for-gpa"><span>GPA</span></p>
 		</div>
 		<p>This certification is issued for whatever legal purpose it may serve.</p>
@@ -120,7 +125,6 @@
 				</tr>
 				
 			</table>
-			<p class="table-adder"><span class="plus"></span><span class="minus"></span></p>
 		</div>
 	</div><!-- subjLoad_table -->
 
@@ -136,7 +140,7 @@
 	</div><!-- signatures-2 -->
 
 	<footer id="main-footer">
-		<p class="text-right">Developed and Maintained by <a href="http://github.com/ghilo17">Gimel C. Contillo</a></p>
+		<p class="text-right">Developed and Maintained by <a href="http://github.com/gicontz">Gimel C. Contillo</a></p>
 	</footer>
 </div><!-- container -->
 
