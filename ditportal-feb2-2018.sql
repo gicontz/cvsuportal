@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2018 at 03:09 AM
+-- Generation Time: Feb 02, 2018 at 07:49 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -107,7 +107,95 @@ CREATE TABLE IF NOT EXISTS `grades_table` (
   `remarks` varchar(20) NOT NULL,
   `ay` varchar(100) NOT NULL,
   `sem` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
+
+--
+-- Dumping data for table `grades_table`
+--
+
+INSERT INTO `grades_table` (`grade_ID`, `student_number`, `subj_id`, `final_grade`, `remarks`, `ay`, `sem`) VALUES
+(1, 201501380, '1', '2.00', 'PASSED', '2017-2018', 2),
+(2, 2015011662, '1', '2.00', 'PASSED', '2017-2018', 2),
+(3, 2015011553, '1', '2.75', 'PASSED', '2017-2018', 2),
+(4, 2015011607, '1', '1.75', 'PASSED', '2017-2018', 2),
+(5, 201501603, '1', '1.75', 'PASSED', '2017-2018', 2),
+(6, 201501758, '1', '2.75', 'PASSED', '2017-2018', 2),
+(7, 2015011571, '1', '2.00', 'PASSED', '2017-2018', 2),
+(8, 2015011378, '1', '2.25', 'PASSED', '2017-2018', 2),
+(9, 2015011888, '1', '2.00', 'PASSED', '2017-2018', 2),
+(10, 2015011344, '1', '2.00', 'PASSED', '2017-2018', 2),
+(11, 201501940, '1', '2.50', 'PASSED', '2017-2018', 2),
+(12, 2015011728, '1', '2.25', 'PASSED', '2017-2018', 2),
+(13, 2015011350, '1', '2.50', 'PASSED', '2017-2018', 2),
+(14, 201501960, '1', '2.25', 'PASSED', '2017-2018', 2),
+(15, 2015011610, '1', '1.75', 'PASSED', '2017-2018', 2),
+(16, 201402126, '1', '2.50', 'PASSED', '2017-2018', 2),
+(17, 2015011336, '1', '2.00', 'PASSED', '2017-2018', 2),
+(18, 2015011677, '1', '2.00', 'PASSED', '2017-2018', 2),
+(19, 201501168, '1', '2.25', 'PASSED', '2017-2018', 2),
+(20, 2015011585, '1', '2.00', 'PASSED', '2017-2018', 2),
+(21, 2015011810, '1', '1.75', 'PASSED', '2017-2018', 2),
+(22, 2015011764, '1', '2.75', 'PASSED', '2017-2018', 2),
+(23, 2015011841, '1', '2.00', 'PASSED', '2017-2018', 2),
+(24, 2015011806, '1', '1.75', 'PASSED', '2017-2018', 2),
+(25, 2015011082, '1', '2.00', 'PASSED', '2017-2018', 2),
+(26, 2015011756, '1', '2.50', 'PASSED', '2017-2018', 2),
+(27, 201701151, '1', '2.50', 'PASSED', '2017-2018', 2),
+(28, 2015011675, '1', '2.00', 'PASSED', '2017-2018', 2),
+(29, 2015011802, '1', '2.25', 'PASSED', '2017-2018', 2),
+(30, 201701829, '1', '2.75', 'PASSED', '2017-2018', 2),
+(31, 2015011783, '1', '2.00', 'PASSED', '2017-2018', 2),
+(32, 2015011761, '1', '2.50', 'PASSED', '2017-2018', 2),
+(33, 2015011335, '1', '2.50', 'PASSED', '2017-2018', 2),
+(34, 2015011597, '1', '2.00', 'PASSED', '2017-2018', 2),
+(35, 2015011878, '1', '2.00', 'PASSED', '2017-2018', 2),
+(36, 201701153, '1', '3.00', 'PASSED', '2017-2018', 2),
+(37, 201701511, '1', '2.75', 'PASSED', '2017-2018', 2),
+(38, 2015011669, '1', '2.00', 'PASSED', '2017-2018', 2),
+(39, 2015011847, '1', '5.00', 'DRP', '2017-2018', 2),
+(40, 201501090, '1', '2.50', 'PASSED', '2017-2018', 2),
+(41, 2015011780, '1', '1.75', 'PASSED', '2017-2018', 2),
+(42, 2015011601, '1', '2.75', 'PASSED', '2017-2018', 2),
+(43, 2015011559, '1', '2.25', 'PASSED', '2017-2018', 2),
+(44, 2015011745, '1', '2.00', 'PASSED', '2017-2018', 2),
+(45, 2015011782, '1', '2.00', 'PASSED', '2017-2018', 2),
+(46, 2015011874, '1', '2.25', 'PASSED', '2017-2018', 2),
+(47, 201701150, '1', '2.75', 'PASSED', '2017-2018', 2),
+(48, 2015011710, '1', '2.75', 'PASSED', '2017-2018', 2),
+(49, 2015011124, '1', '2.00', 'PASSED', '2017-2018', 2),
+(50, 2015011175, '1', '3.00', 'PASSED', '2017-2018', 2),
+(51, 201501561, '1', '2.25', 'PASSED', '2017-2018', 2),
+(52, 2015011279, '1', '1.75', 'PASSED', '2017-2018', 2),
+(53, 201501601, '1', '2.00', 'PASSED', '2017-2018', 2),
+(54, 201301699, '1', '3.00', 'PASSED', '2017-2018', 2),
+(55, 201401287, '1', '2.00', 'PASSED', '2017-2018', 2),
+(56, 201501260, '1', '2.25', 'PASSED', '2017-2018', 2),
+(57, 201501510, '1', '3.00', 'PASSED', '2017-2018', 2),
+(58, 201501174, '1', '2.25', 'PASSED', '2017-2018', 2),
+(59, 2015011286, '1', '2.50', 'PASSED', '2017-2018', 2),
+(60, 201501433, '1', '2.75', 'PASSED', '2017-2018', 2),
+(61, 2015011223, '1', '2.50', 'PASSED', '2017-2018', 2),
+(62, 201501157, '1', '2.50', 'PASSED', '2017-2018', 2),
+(63, 2015011882, '1', '5.00', 'FAILED', '2017-2018', 2),
+(64, 201501253, '1', '1.50', 'PASSED', '2017-2018', 2),
+(65, 201501829, '1', '1.25', 'PASSED', '2017-2018', 2),
+(66, 2015011933, '1', '2.25', 'PASSED', '2017-2018', 2),
+(67, 2015011217, '1', '1.00', 'PASSED', '2017-2018', 2),
+(68, 201501177, '1', '1.75', 'PASSED', '2017-2018', 2),
+(69, 201501711, '1', '2.00', 'PASSED', '2017-2018', 2),
+(70, 2014011131, '1', '2.75', 'PASSED', '2017-2018', 2),
+(71, 201301986, '1', '3.00', 'PASSED', '2017-2018', 2),
+(72, 2015011060, '1', '2.25', 'PASSED', '2017-2018', 2),
+(73, 2015012027, '1', '2.50', 'PASSED', '2017-2018', 2),
+(74, 2015011215, '1', '1.50', 'PASSED', '2017-2018', 2),
+(75, 201501820, '1', '2.25', 'PASSED', '2017-2018', 2),
+(76, 2015011203, '1', '2.75', 'PASSED', '2017-2018', 2),
+(77, 2015011278, '1', '1.75', 'PASSED', '2017-2018', 2),
+(78, 201501240, '1', '2.00', 'PASSED', '2017-2018', 2),
+(79, 201501189, '1', '2.75', 'PASSED', '2017-2018', 2),
+(80, 201501387, '1', '1.50', 'PASSED', '2017-2018', 2),
+(81, 201501306, '1', '2.25', 'PASSED', '2017-2018', 2),
+(82, 2015011217, '4', '1.75', 'PASSED', '2017-2018', 2);
 
 -- --------------------------------------------------------
 
@@ -161,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `sections_table` (
   `course_id` int(11) NOT NULL,
   `year` varchar(100) NOT NULL,
   `section` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `sections_table`
@@ -170,7 +258,8 @@ CREATE TABLE IF NOT EXISTS `sections_table` (
 INSERT INTO `sections_table` (`section_id`, `course_id`, `year`, `section`) VALUES
 (1, 2, '1', 'A'),
 (2, 2, '2', 'D'),
-(3, 2, '2', 'A');
+(3, 2, '2', 'A'),
+(6, 3, '3', 'A');
 
 -- --------------------------------------------------------
 
@@ -183,6 +272,13 @@ CREATE TABLE IF NOT EXISTS `students_table` (
   `user_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `students_table`
+--
+
+INSERT INTO `students_table` (`student_number`, `user_id`, `section_id`) VALUES
+(2015011217, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -274,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `users_table` (
   `birthday` varchar(100) NOT NULL,
   `department` varchar(100) NOT NULL,
   `section_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users_table`
@@ -283,7 +379,8 @@ CREATE TABLE IF NOT EXISTS `users_table` (
 INSERT INTO `users_table` (`user_id`, `username`, `password`, `account_type`, `first_name`, `last_name`, `middle_name`, `extension`, `birthday`, `department`, `section_id`) VALUES
 (1, 'Juan', '4rbKzK7xXINTNSc2cLBnjHKK6g6TXfsA_Zra_U9fFMY', 'instructor', 'Juan', 'Cruz', 'Dela', 'secret', 'august', 'CEO', 3),
 (2, 'admin', '4rbKzK7xXINTNSc2cLBnjHKK6g6TXfsA_Zra_U9fFMY', 'instructor', 'Gimel', 'Contillo', 'Corpuz', '', '', 'DIT', 0),
-(3, 'head', '4rbKzK7xXINTNSc2cLBnjHKK6g6TXfsA_Zra_U9fFMY', 'deptchair', 'Brylle', 'Samson', 'D', '', '', 'DIT', 0);
+(3, 'head', '4rbKzK7xXINTNSc2cLBnjHKK6g6TXfsA_Zra_U9fFMY', 'deptchair', 'Brylle', 'Samson', 'D', '', '', 'DIT', 0),
+(4, 'student', '4rbKzK7xXINTNSc2cLBnjHKK6g6TXfsA_Zra_U9fFMY', 'student', 'Erwin', 'Hayag', 'O', '', '', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -395,7 +492,7 @@ MODIFY `enrolled_subject_id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `grades_table`
 --
 ALTER TABLE `grades_table`
-MODIFY `grade_ID` bigint(100) NOT NULL AUTO_INCREMENT;
+MODIFY `grade_ID` bigint(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `instructors_table`
 --
@@ -410,7 +507,7 @@ MODIFY `population_id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `sections_table`
 --
 ALTER TABLE `sections_table`
-MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `subjects_table`
 --
@@ -425,7 +522,7 @@ MODIFY `subjload_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 -- AUTO_INCREMENT for table `users_table`
 --
 ALTER TABLE `users_table`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
