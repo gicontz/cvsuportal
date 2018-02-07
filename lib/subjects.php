@@ -79,4 +79,9 @@ class Subjects extends XDLINE{
 	public function getInstructorId($userId, $configfile){
 		return parent::select("instructor_id", "instructors_table", "user_id = $userId", $configfile)[0]["instructor_id"];
 	}
+						
+	public function getSubjects($courseid, $configfile){
+		return parent::select("*", "subjects_table", "`course_id` = $courseid", $configfile);
+	}
+
 }

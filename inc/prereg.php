@@ -1,5 +1,6 @@
 <?php
 global $studentClass;
+global $subjectClass;
 $student_number = $studentClass->getStudentNumber($_SESSION['users_details']['user_id'], 'config.ini');
 $name = getproperfullname($_SESSION['users_details']);
 ?>
@@ -115,16 +116,22 @@ $name = getproperfullname($_SESSION['users_details']);
 
 	<div class="row subjLoad_table">
 		<div class="col-md-12">
-			<table cellpadding="2px" width="100%" border="1px" >
-				<tr>
-					<th>COURSE CODE</th>
-					<th>SUBJECT CODE</th>
-					<th>UNIT</th>
-					<th>TIME</th>
-					<th>DAY</th>
-				</tr>
+			<table cellpadding="2px" width="100%" border="1px" id="table-preenrollment">
+				<thead>
+					<tr>
+						<th>COURSE CODE</th>
+						<th>SUBJECT CODE</th>
+						<th>UNIT</th>
+						<th>TIME</th>
+						<th>DAY</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
 				
 			</table>
+			<button type="button" class="btn btn-success btn-xs" id="subject-add"><i class="fa fa-plus" data-toggle="modal" data-target="#addSubject"></i></button>
 		</div>
 	</div><!-- subjLoad_table -->
 
@@ -139,10 +146,75 @@ $name = getproperfullname($_SESSION['users_details']);
 		</div>
 	</div><!-- signatures-2 -->
 
-	<footer id="main-footer">
-		<p class="text-right">Developed and Maintained by <a href="http://github.com/gicontz">Gimel C. Contillo</a></p>
-	</footer>
+
+<!-- Add Subject Modal-->
+  <div class="modal fade" id="addSubject" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">PRE-ENROLLMENT - ADD SUBJECT </h4>
+        </div>
+        <div class="modal-body">
+	        <div class="row subjLoad_table">
+				<div class="col-md-12">
+					<table cellpadding="2px" width="100%" border="1px" id="table-addSubject">
+						<thead>
+							<tr>
+								<th>COURSE CODE</th>
+								<th>SUBJECT CODE</th>
+								<th>UNIT</th>
+								<th>TIME</th>
+								<th>DAY</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$subjectLists = $subjectClass::getSubjects("3","config.ini");// 3 is Temporary
+								foreach ($subjectLists as $key => $value) {
+									echo "<tr id='row-".$subjectLists[$key]["subj_id"]."'>
+										<td>".$subjectLists[$key]["course_code"]."</td>
+										<td>".$subjectLists[$key]["course_title"]."</td>
+										<td>".$subjectLists[$key]["units"]."</td>
+										<td></td>
+										<td></td>
+										
+										<td class='btn-addSubject' id='td-".$subjectLists[$key]["subj_id"]."'>
+											<button class='btn btn-success btn-xs addBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-plus'></i>
+											</button>
+										</td>
+
+										<td class='btn-subSubject' id='sub-td-".$subjectLists[$key]["subj_id"]."'>
+											<button class='btn btn-danger btn-xs subBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-minus'></i>
+											</button>
+										</td>
+
+
+									</tr>";
+								}
+							 ?>
+						</tbody>
+					</table>
+				</div>
+			</div><!-- subjLoad_table -->
+        </div>
+        <div class="modal-footer">
+          <label style="float: left;">Total Units Accumulated: <span id="total_units">0</span></label>
+          <button type="button" class="btn btn-success" data-dismiss="modal" id="add_done">Done</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="add_exceed" disabled>27 Units is the Maximum allowed units</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="add_close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Subtract Subject Modal-->
+ 
+
+
 </div><!-- container -->
 
 
-	<script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript" src="js/prereg.js"></script>
