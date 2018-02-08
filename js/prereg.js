@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 	function transferToOrigin(selector){
 		$('#table-addSubject tbody '+selector+' .btn-addSubject').hide();
-		$('#table-addSubject tbody '+selector+' .btn-subSubject').show();
+		$('#table-addSubject tbody '+selector+' .btn-subSubject').hide();
 		$('#table-addSubject tbody '+selector).clone().appendTo('#table-preenrollment tbody');
 		$('#table-addSubject tbody '+selector).clone().appendTo('#table-subSubject tbody');
 		$('#table-addSubject tbody '+selector).remove();
@@ -47,6 +47,11 @@ $(document).ready(function(){
 		$('#table-preenrollment tbody '+selector).remove();
 		$('#table-subSubject tbody '+selector).remove();
 	}
+
+
+	$('body').on('click', '#subject-minus', function() {
+		$('#table-preenrollment tbody .btn-subSubject').toggle();
+	});
 
 
 });
