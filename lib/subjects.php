@@ -84,4 +84,16 @@ class Subjects extends XDLINE{
 		return parent::select("*", "subjects_table", "`course_id` = $courseid", $configfile);
 	}
 
+	public function getPassedSubjects($studentNumber, $configfile){
+		return parent::select("*", "`subjects_table` 
+			INNER JOIN `grades_table` ON `subjects_table`.`subj_id` = `grades_table`.`subj_id`", "`grades_table`.`student_number` = '$studentNumber'", $configfile);
+	}
+
+	public function getTotalUnitsPassed($passedSubjects, $count = 0){
+		foreach ($passedSubjects as $key => $value) {
+			$count += $passedSubjects[$key]['units'];
+		}
+		return $count;
+	}
+
 }

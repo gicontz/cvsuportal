@@ -131,7 +131,8 @@ $name = getproperfullname($_SESSION['users_details']);
 				</tbody>
 				
 			</table>
-			<button type="button" class="btn btn-success btn-xs" id="subject-add"><i class="fa fa-plus" data-toggle="modal" data-target="#addSubject"></i></button>
+			<button type="button" class="btn btn-success btn-xs" id="subject-add" title='Add Subjects'><i class="fa fa-plus" data-toggle="modal" data-target="#addSubject"></i></button>
+			<button type="button" class="btn btn-success btn-xs" id="subject-minus" title='Toggle Remove Subjects'><i class="fa fa-minus"></i></button>
 		</div>
 	</div><!-- subjLoad_table -->
 
@@ -171,27 +172,44 @@ $name = getproperfullname($_SESSION['users_details']);
 						<tbody>
 							<?php 
 								$subjectLists = $subjectClass::getSubjects("3","config.ini");// 3 is Temporary
-								foreach ($subjectLists as $key => $value) {
-									echo "<tr id='row-".$subjectLists[$key]["subj_id"]."'>
-										<td>".$subjectLists[$key]["course_code"]."</td>
-										<td>".$subjectLists[$key]["course_title"]."</td>
-										<td>".$subjectLists[$key]["units"]."</td>
-										<td></td>
-										<td></td>
-										
-										<td class='btn-addSubject' id='td-".$subjectLists[$key]["subj_id"]."'>
-											<button class='btn btn-success btn-xs addBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-plus'></i>
-											</button>
-										</td>
+								$passedSubjects = $subjectClass::getPassedSubjects($student_number,"config.ini");
+								$totalUnitsPassed = $subjectClass::getTotalUnitsPassed($passedSubjects);
 
-										<td class='btn-subSubject' id='sub-td-".$subjectLists[$key]["subj_id"]."'>
-											<button class='btn btn-danger btn-xs subBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-minus'></i>
-											</button>
-										</td>
+								function availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed){
+									foreach ($subjectLists as $key => $value) {
+										foreach ($passedSubjects as $keys => $values) {
+											if ($passedSubjects[$keys]['subj_id'] == $subjectLists[$key]['subj_id']) {
+												break;
+											}else if ($keys == count($passedSubjects)-1) {
 
+													if (($passedSubjects[$keys]['course_code'] == $subjectLists[$key]['prerequisite']) || ($subjectLists[$key]['prerequisite'] == '') || ($totalUnitsPassed >= 92 && $subjectLists[$key]['prerequisite'] == '3rd year standing') || ($totalUnitsPassed >= 335 && $subjectLists[$key]['prerequisite'] == "4th year standing")) {
 
-									</tr>";
+													echo "<tr id='row-".$subjectLists[$key]["subj_id"]."'>
+															<td>".$subjectLists[$key]["course_code"]."</td>
+															<td>".$subjectLists[$key]["course_title"]."</td>
+															<td>".$subjectLists[$key]["units"]."</td>
+															<td></td>
+															<td></td>
+															
+															<td class='btn-addSubject' id='td-".$subjectLists[$key]["subj_id"]."'>
+																<button class='btn btn-success btn-xs addBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-plus'></i>
+																</button>
+															</td>
+
+															<td class='btn-subSubject' id='sub-td-".$subjectLists[$key]["subj_id"]."'>
+																<button class='btn btn-danger btn-xs subBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-minus'></i>
+																</button>
+															</td>
+														</tr>";
+														break;
+												}
+											}
+										}
+									}
 								}
+
+								availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed);
+								
 							 ?>
 						</tbody>
 					</table>
