@@ -176,6 +176,7 @@ $name = getproperfullname($_SESSION['users_details']);
 								$totalUnitsPassed = $subjectClass::getTotalUnitsPassed($passedSubjects);
 
 								function availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed){
+									if($passedSubjects[0] != "") :
 									foreach ($subjectLists as $key => $value) {
 										foreach ($passedSubjects as $keys => $values) {
 											if ($passedSubjects[$keys]['subj_id'] == $subjectLists[$key]['subj_id']) {
@@ -205,7 +206,10 @@ $name = getproperfullname($_SESSION['users_details']);
 												}
 											}
 										}
-									}
+									}								
+								else :
+									echo "<h3>You are enrolled recently in this University, no records found</h3>";
+									endif;
 								}
 
 								availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed);

@@ -89,9 +89,11 @@ class Subjects extends XDLINE{
 			INNER JOIN `grades_table` ON `subjects_table`.`subj_id` = `grades_table`.`subj_id`", "`grades_table`.`student_number` = '$studentNumber'", $configfile);
 	}
 
-	public function getTotalUnitsPassed($passedSubjects, $count = 0){
-		foreach ($passedSubjects as $key => $value) {
-			$count += $passedSubjects[$key]['units'];
+	public function getTotalUnitsPassed($passedSubjects, $count = 0){		
+		if ($passedSubjects[0] != ""){
+			foreach ($passedSubjects as $key => $value) {
+				$count += $passedSubjects[$key]['units'];
+			}
 		}
 		return $count;
 	}
