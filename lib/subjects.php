@@ -25,6 +25,10 @@ class Subjects extends XDLINE{
 		return parent::select("course_id, subj_id, course_code, course_title", "subjects_table", "course_id = $courseid", $configfile);
 	}
 
+	public function showCurrentSubjects($student_number){
+		
+	}
+
 	public function loadSubjectbyStudent($student_number, $subjId, $sectionId, $configfile){
 		return parent::insert("subjloads_table", array(
 			'instructor_id' => $instructorId,

@@ -1,19 +1,17 @@
 <?php 
+include('functions.php');
     session_start();
     if (isset($_SESSION['users_details'])) {
       $accessibility = $_SESSION['users_details']['account_type'];
       switch ($_SESSION['users_details']['account_type']) {
-              case 'instructor':
-                header('Location: /cvsuportal/profile-instructor');
-                break;
-              case 'deptchair':
-                header('Location: /cvsuportal/profile-deptchair');
+              case 'teacher':
+                header('Location: $domain_header/profile-instructor');
                 break;
               case 'student':
-                header('Location: /cvsuportal/profile-student');
+                header('Location: $domain_header/profile-student');
                 break;
                 case 'admin':
-                header('Location: /cvsuportal/profile-admin');
+                header('Location: $domain_header/profile-admin');
                 break;
             }
     }
