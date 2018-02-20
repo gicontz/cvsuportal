@@ -4,6 +4,10 @@
 <head>
   <title>DIT Portal | <?php echo $instructors_page_title; ?></title>
   <?php
+  $pager = "";
+   if(isset($_REQUEST['content'])) :
+    $pager = $_REQUEST['content'];
+  endif;
   session_start();
   getHeaderAssets();
   if(isset($_SESSION['users_details'])){
@@ -30,16 +34,24 @@
     <div class="wrapper">
       <nav id="sidebar">
        <?php 
-       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-hand-grab-o"];
+       $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-hand-grab-o", "fa-plus"];
        ___user_navigation("img/sample.jpg", array(
-          'Profile' => "#profile",
+          'Profile' => "profile-instructor",
           'Subjects' => "#",
           'Schedule' => "#",
-          'Advisory' => "#"
+          'Advisory' => "#",
+          'Generate Student' => "?content=generatepass"
         ), $navicons);
         ?>
       </nav>
       <div id="content">
+
+        <?php if($pager == 'generatepass') {
+          ___generate_student();
+        }else {
+        ?>
+
+
         <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="col-md-3 col-xs-3">
@@ -194,6 +206,7 @@
 </div>        
 
 <?php 
+}
 getFooterContents();
 ?>            
 </div>

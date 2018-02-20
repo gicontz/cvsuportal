@@ -70,6 +70,11 @@ function ___student_prereg(){
     include('inc/prereg.php');
 }
 
+function ___generate_student(){
+	inject_asset('stylesheet', 'css/generate_student.css');
+    include('inc/generate_student.php');
+}
+
 function inject_asset($type, $url){
 	if ($type == 'stylesheet') {
 	?>
