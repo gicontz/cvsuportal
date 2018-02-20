@@ -244,5 +244,16 @@ class XDLINE{
 	public static function getfullname($userArray){
 		echo $userArray['first_name'] .  " " . $userArray['last_name'];
 	}
+
+
+	/*======================
+	## Generate Password
+	=======================*/
+	function generate_password(){
+		$salted = uniqid('CvSU-Sc', true);
+		$hashed = hash('MD2', $salted);
+		$trim = substr($hashed, 0, 12);
+		return $trim;
+	}
 }
  ?>
