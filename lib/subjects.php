@@ -45,7 +45,7 @@ class Subjects extends XDLINE{
 		$data = array();
 
 		if($instructorId != "" && $ay != "" && $subjId != "") :
-		$data = parent::select("subjload_id, subjloads_table.section_id, course_main_title, course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
+			$data = parent::select("subjload_id, subjloads_table.section_id, course_main_title, course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
 				inner join subjloads_table on subjects_table.subj_id = subjloads_table.subj_id
 				inner join sections_table on sections_table.section_id = subjloads_table.section_id
 				inner join courses_table on sections_table.course_id = courses_table.course_id", 
@@ -59,7 +59,7 @@ class Subjects extends XDLINE{
 		$data = array();
 
 		if($instructorId != "" && $ay != "") :
-		$data = parent::select("subjload_id, course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
+			$data = parent::select("subjload_id, course_code, course_title, units, prerequisite, course, year, section, mode", "subjects_table
 				inner join subjloads_table on subjects_table.subj_id = subjloads_table.subj_id
 				inner join sections_table on sections_table.section_id = subjloads_table.section_id
 				inner join courses_table on sections_table.course_id = courses_table.course_id", 
@@ -73,7 +73,7 @@ class Subjects extends XDLINE{
 		$data = array();
 
 		if($instructorId != "") :
-		$data = parent::select("instructor_id, subjects_table.subj_id, section_id, course_code, course_title", "subjloads_table join subjects_table on subjects_table.subj_id = subjloads_table.subj_id", 
+			$data = parent::select("instructor_id, subjects_table.subj_id, section_id, course_code, course_title", "subjloads_table join subjects_table on subjects_table.subj_id = subjloads_table.subj_id", 
 				"instructor_id = $instructorId and subjloads_table.acad_year = '$ay' GROUP BY subj_id", $configfile);
 		endif;
 
@@ -83,7 +83,7 @@ class Subjects extends XDLINE{
 	public function getInstructorId($userId, $configfile){
 		return parent::select("instructor_id", "instructors_table", "user_id = $userId", $configfile)[0]["instructor_id"];
 	}
-						
+
 	public function getSubjects($courseid, $configfile){
 		return parent::select("*", "subjects_table", "`course_id` = $courseid", $configfile);
 	}
@@ -101,5 +101,48 @@ class Subjects extends XDLINE{
 		}
 		return $count;
 	}
+
+
+	// private function isSubjectable($subjectLists, $passedSubjects, $student_number){
+	// 	$thirdysUnits = parent::select("SUM(units)", "grades_table inner join subjects_table on grades_table.subj_id = subjects_table.subj_id", "student_number = $student_number and year_to_take != 4 and year_to_take != 0");
+	// 	return $passedSubjects[$keys]['course_code'] == $subjectLists[$key]['prerequisite']) || ($subjectLists[$key]['prerequisite'] == '') || ($totalUnitsPassed >= 92 && $subjectLists[$key]['prerequisite'] == '3rd year standing') || ($totalUnitsPassed >= 335 && $subjectLists[$key]['prerequisite'] == "4th year standing" ;
+	// }
+
+	// public function availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed){
+	// 	if($passedSubjects[0] != "") :
+	// 		foreach ($subjectLists as $key => $value) {
+	// 			foreach ($passedSubjects as $keys => $values) {
+	// 				if ($passedSubjects[$keys]['subj_id'] == $subjectLists[$key]['subj_id']) {
+	// 					break;
+	// 				}else if ($keys == count($passedSubjects)-1) {
+
+	// 					if () {
+
+	// 						echo "<tr id='row-".$subjectLists[$key]["subj_id"]."'>
+	// 						<td>".$subjectLists[$key]["course_code"]."</td>
+	// 						<td>".$subjectLists[$key]["course_title"]."</td>
+	// 						<td>".$subjectLists[$key]["units"]."</td>
+	// 						<td></td>
+	// 						<td></td>
+
+	// 						<td class='btn-addSubject' id='td-".$subjectLists[$key]["subj_id"]."'>
+	// 						<button class='btn btn-success btn-xs addBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-plus'></i>
+	// 						</button>
+	// 						</td>
+
+	// 						<td class='btn-subSubject' id='sub-td-".$subjectLists[$key]["subj_id"]."'>
+	// 						<button class='btn btn-danger btn-xs subBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-minus'></i>
+	// 						</button>
+	// 						</td>
+	// 						</tr>";
+	// 						break;
+	// 					}
+	// 				}
+	// 			}
+	// 		}								
+	// 	else :
+	// 		echo "<h3>No records found</h3>";
+	// 	endif;
+	// }
 
 }

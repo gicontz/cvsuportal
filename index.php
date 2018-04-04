@@ -4,14 +4,14 @@ include('functions.php');
     if (isset($_SESSION['users_details'])) {
       $accessibility = $_SESSION['users_details']['account_type'];
       switch ($_SESSION['users_details']['account_type']) {
-              case 'teacher':
-                header('Location: $domain_header/profile-instructor');
+              case 'instructor':
+                header('Location: '.$domain_header.'/profile-instructor');
                 break;
               case 'student':
-                header('Location: $domain_header/profile-student');
+                header('Location: '.$domain_header.'/profile-student');
                 break;
-                case 'admin':
-                header('Location: $domain_header/profile-admin');
+                case 'head':
+                header('Location: '.$domain_header.'/profile-head');
                 break;
             }
     }
