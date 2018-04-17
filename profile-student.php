@@ -9,6 +9,7 @@
     $pager = $_REQUEST['content'];
   endif;
   session_start();
+  $_SESSION['course_id'] = $subjectClass->getCourseId($_SESSION['users_details']['user_id']); 
   getHeaderAssets();
   if(isset($_SESSION['users_details'])){
     switch ($_SESSION['users_details']['account_type']) {

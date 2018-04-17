@@ -8,7 +8,7 @@ class Student extends XDLINE{
 	}
 
 	public function tabulateGrades($student_number, $arrayUniversity, $configfile){
-		$grades = parent::select("*", "grades_table", "ay='{$arrayUniversity['acad_year']}' AND sem='{$arrayUniversity['semester']}' AND student_number=$student_number", $configfile);
+		$grades = parent::select("*", "grades_table", "ay='{$arrayUniversity['acad_year']}' AND sem='{$arrayUniversity['semester']}' AND student_number = $student_number AND (remarks = 'PASSED' OR remarks = 'FAILED')", $configfile);
 		if($grades[0] != "") :
 			$i = 1;
 			foreach($grades as $grade){
@@ -23,6 +23,30 @@ class Student extends XDLINE{
 			<?php
 			$i++;
 			}
+		endif;
+	}
+
+
+	public function addStudent($student_id, $firstname, $lastname, $middlename, $section, $ext, $contact_number, $password, $configfile){
+		$uid = parent::select("MAX(user_id)", "users_table", "", $configfile)[0]['MAX(user_id)'];
+		$stud_info = parent::select("student_number", "students_table", "student_number = $student_id or contact_number = $contact_number", $configfile)[0];
+		if($stud_info == ""):
+			$res = parent::insert("users_table", array(
+				'account_type' => 'student',
+				'username' => $student_id,
+				'password' => $password,
+			), "1", "0", $configfile);
+
+			if($res == "1"):
+				$uid = parent::select("MAX(user_id)", "users_table", "", $configfile)[0]["MAX(user_id)"];
+				return parent::insert("students_table", array(
+					'student_number' => $student_id,
+					'user_id' => $uid,
+					'section_id' => 0,
+					'validation_number' => 0
+				), "1", "0", $configfile);
+			endif;
+			return "0";
 		endif;
 	}
 }

@@ -16,15 +16,16 @@ $(document).ready(function(){
 	$('body').on('click', '.addBtn', function() {
 		var unit_value = parseInt($(this).val());
 		var totalUnits = parseInt($('#total_units').text());
-		if (totalUnits + unit_value <= 27) {
+		if (totalUnits + unit_value <= max_units) {
 			$('#total_units').text(totalUnits + unit_value);
 			transferToOrigin('#'+$(this).closest('tr').attr('id'));
 		}else {
-			alert('The Maximum Units Must Be 27 and below');
+			alert('The Maximum Units Must Be '+ max_units +' and below');
 		}
 
-		if (parseInt($('#total_units').text()) >= 27) {
+		if (parseInt($('#total_units').text()) >= max_units) {
 			$('#add_exceed').show();
+			$('#add_exceed').text(max_units +' Units is the Maximum allowed units');
 			$('#add_done').hide();
 		}else {
 			$('#add_exceed').hide();
