@@ -9,6 +9,8 @@ if ($data['request_type'] == "request-login") {
 	generateUser($data['studentNumber'], $data['validationNumber'], $data['confirmationPassword']);
 }else if($data['request_type'] == "request-confirm-student"){
 	createStudentAccount();
+}else if ($data['request_type'] == "update-profile-picture") {
+	profilePicture($data['imageData']);
 }
 
 function login($username, $password){
@@ -71,6 +73,15 @@ function createStudentAccount(){
 
 		echo "SUCCESSFULLY GENERATED ACCOUNT";
 	}
+
+}
+
+function profilePicture($imageLink){
+	session_start();
+	$data = file_get_contents($imageLink);
+	$filename = hash('MD2', $_SESSION['users_details']['user_id']).'.png';
+	$new = '../img/profile/'.$filename;
+	file_put_contents($new, $data);
 
 }
 	

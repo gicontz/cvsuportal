@@ -35,7 +35,7 @@
       <nav id="sidebar">
        <?php 
        $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-hand-grab-o", "fa-plus"];
-       ___user_navigation("img/sample.jpg", array(
+       ___user_navigation("img/profile/".getProfilePicture(), array(
           'Profile' => "profile-instructor",
           'Subjects' => "#",
           'Schedule' => "#",

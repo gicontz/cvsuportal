@@ -43,8 +43,8 @@ function ___user_navigation($image, $nav_array, $nav_icons){
 	$i = 0;
 	?>
 	<div class="sidebar-header">
-		<a href="#"><img src="<?php echo $image; ?>" id="img" title="Profile" class="center-block"></a>
-		<a href="#"><img src="<?php echo $image; ?>" id="collapsed" title="Profile" class=" center-block"></a><br>
+		<a href="?content=profileImg"><img src="<?php echo $image; ?>" id="img" title="Profile" class="center-block" onerror="this.src='img/default-profile.png'"></a>
+		<a href="?content=profileImg"><img src="<?php echo $image; ?>" id="collapsed" title="Profile" class=" center-block" onerror="this.src='img/default-profile.png'"></a><br>
 		<h2 class="text-center" id="hide"><?php $XDLINE::getfullname($_SESSION['users_details']); ?></h2>
 	</div>
 	<ul class="list-unstyled components" style="font-size: 15px;">
@@ -75,6 +75,11 @@ function ___generate_student(){
     include('inc/generate_student.php');
 }
 
+function ___profile_image(){
+	inject_asset('script', 'dist/jquery.cropit.js');
+	include('inc/profile_image.php');
+}
+
 function inject_asset($type, $url){
 	if ($type == 'stylesheet') {
 	?>
@@ -94,4 +99,9 @@ function inject_asset($type, $url){
 
 function getproperfullname($userArray){
 		return $userArray['last_name'] . ", " . $userArray['first_name'] . " " . $userArray['middle_name'];
+}
+
+function getProfilePicture(){
+	$userArray = $_SESSION['users_details'];
+	return hash('MD2', $userArray['user_id']).'.png';
 }

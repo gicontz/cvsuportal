@@ -36,7 +36,7 @@
       <nav id="sidebar">
        <?php 
        $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-file", "fa-certificate", "fa-book"];
-       ___user_navigation("img/sample.jpg", array(
+       ___user_navigation("img/profile/".getProfilePicture(), array(
           'Profile' => "profile-student",
           'Subjects' => "#",
           'Schedule' => "#",
@@ -49,7 +49,9 @@
       <div id="content">
 
         <?php if($pager == 'prereg') {
-          ___student_prereg();
+      		___student_prereg();
+        }else if ($pager == 'profileImg') {
+        	___profile_image();
         }
           else{
         ?>
