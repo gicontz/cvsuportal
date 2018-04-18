@@ -4,6 +4,10 @@
 <head>
   <title>DIT Portal | <?php echo $deptchair_page_title; ?></title>        
   <?php
+  $pager = "";
+  if(isset($_REQUEST['content'])) :
+    $pager = $_REQUEST['content'];
+  endif;
   session_start();
   getHeaderAssets();
   if(isset($_SESSION['users_details'])){
@@ -32,14 +36,21 @@
        <?php 
        $navicons = ["fa-user-o", "fa-book", "fa-calendar-o", "fa-hand-grab-o"];
        ___user_navigation("img/profile/".getProfilePicture(), array(
-        'Profile' => "#profile",
+        'Profile' => "profile-deptchair",
         'Subjects' => "#",
         'Schedule' => "#",
         'Advisory' => "#"
       ), $navicons);
       ?>
     </nav>
+    
+
     <div id="content">
+		<?php 
+	    	if ($pager == "profileImg") {
+	    		___profile_image();
+	    	}else {
+	     ?>
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="col-md-3 col-xs-3">
@@ -53,6 +64,7 @@
             </div>
           </div>
         </div>
+
         <div class="col-md-9 col-xs-9"><br>
           <li class="dropdown pull-right" style="list-style: none">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account&nbsp;&nbsp;
@@ -62,6 +74,7 @@
                <li><a href="lib/logout" class="nav-text"><span class="fa fa-sign-out"></span> Logout</a></li>
              </ul>
            </div>
+
            <div class="col-md-12 col-xs-12">
             <div class="row">
               <h2>Profile</h2>
@@ -71,6 +84,7 @@
           </div>   
         </div>
       </nav>
+
 
       <!-- Popup Modal View Subject -->
       <div class="modal fade" id="modalsections_subject" role="dialog" style="overflow-y: hidden;">
@@ -352,6 +366,7 @@
 </div>
 
 <?php 
+}
 getFooterContents();
 ?>         
 </div>

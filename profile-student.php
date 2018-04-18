@@ -52,8 +52,7 @@
       		___student_prereg();
         }else if ($pager == 'profileImg') {
         	___profile_image();
-        }
-          else{
+        }else{
         ?>
         <nav class="navbar navbar-default">
           <div class="container-fluid">
