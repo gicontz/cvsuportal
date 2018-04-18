@@ -1,6 +1,10 @@
 <?php
 global $studentClass;
 global $subjectClass;
+
+include_once('lib/subjects.php');
+$subjectC = "Subjects";
+$preregSubjects = new $subjectC($_SESSION['users_details']['user_id'], "config.ini");
 $student_number = $studentClass->getStudentNumber($_SESSION['users_details']['user_id'], 'config.ini');
 $name = getproperfullname($_SESSION['users_details']);
 ?>
@@ -171,49 +175,13 @@ $name = getproperfullname($_SESSION['users_details']);
 						</thead>
 						<tbody>
 							<?php 
-								$subjectLists = $subjectClass::getSubjects("3","config.ini");// 3 is Temporary
-								$passedSubjects = $subjectClass::getPassedSubjects($student_number,"config.ini");
-								$totalUnitsPassed = $subjectClass::getTotalUnitsPassed($passedSubjects);
-
-								function availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed){
-									if($passedSubjects[0] != "") :
-									foreach ($subjectLists as $key => $value) {
-										foreach ($passedSubjects as $keys => $values) {
-											if ($passedSubjects[$keys]['subj_id'] == $subjectLists[$key]['subj_id']) {
-												break;
-											}else if ($keys == count($passedSubjects)-1) {
-
-													if (($passedSubjects[$keys]['course_code'] == $subjectLists[$key]['prerequisite']) || ($subjectLists[$key]['prerequisite'] == '') || ($totalUnitsPassed >= 92 && $subjectLists[$key]['prerequisite'] == '3rd year standing') || ($totalUnitsPassed >= 335 && $subjectLists[$key]['prerequisite'] == "4th year standing")) {
-
-													echo "<tr id='row-".$subjectLists[$key]["subj_id"]."'>
-															<td>".$subjectLists[$key]["course_code"]."</td>
-															<td>".$subjectLists[$key]["course_title"]."</td>
-															<td>".$subjectLists[$key]["units"]."</td>
-															<td></td>
-															<td></td>
-															
-															<td class='btn-addSubject' id='td-".$subjectLists[$key]["subj_id"]."'>
-																<button class='btn btn-success btn-xs addBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-plus'></i>
-																</button>
-															</td>
-
-															<td class='btn-subSubject' id='sub-td-".$subjectLists[$key]["subj_id"]."'>
-																<button class='btn btn-danger btn-xs subBtn' value='".$subjectLists[$key]["units"]."'><i class='fa fa-minus'></i>
-																</button>
-															</td>
-														</tr>";
-														break;
-												}
-											}
-										}
-									}								
-								else :
-									echo "<h3>You are enrolled recently in this University, no records found</h3>";
-									endif;
-								}
-
-								availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed);
-								
+								$course_id = $_SESSION['course_id'];
+								$subjectLists = $preregSubjects->getSubjects($course_id,"config.ini");
+								$passedSubjects = $preregSubjects->getPassedSubjects($student_number,"config.ini");
+								$totalUnitsPassed = $preregSubjects->getTotalUnitsPassed($passedSubjects);
+								$pof = $preregSubjects->percentageOfFailure($student_number,"config.ini");
+								$preregSubjects->standing_units();
+								echo $preregSubjects->availableSubjects($subjectLists, $passedSubjects, $totalUnitsPassed);
 							 ?>
 						</tbody>
 					</table>
@@ -223,7 +191,7 @@ $name = getproperfullname($_SESSION['users_details']);
         <div class="modal-footer">
           <label style="float: left;">Total Units Accumulated: <span id="total_units">0</span></label>
           <button type="button" class="btn btn-success" data-dismiss="modal" id="add_done">Done</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal" id="add_exceed" disabled>27 Units is the Maximum allowed units</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="add_exceed" disabled></button>
           <button type="button" class="btn btn-default" data-dismiss="modal" id="add_close">Close</button>
         </div>
       </div>
@@ -239,4 +207,8 @@ $name = getproperfullname($_SESSION['users_details']);
 
 
 <script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript">	
+	var percentageOfFailure = <?php echo $pof; ?>;
+	var max_units = percentageOfFailure <= 74 && percentageOfFailure <= 50 ? 15 : percentageOfFailure >= 75 ? 0 : 27;
+</script>
 <script type="text/javascript" src="js/prereg.js"></script>
