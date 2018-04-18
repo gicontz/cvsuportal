@@ -48,6 +48,8 @@
 
         <?php if($pager == 'generatepass') {
           ___generate_student();
+        }else if ($pager == 'profileImg') {
+          ___profile_image();
         }else {
         ?>
 
