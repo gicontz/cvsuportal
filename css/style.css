@@ -30,3 +30,6 @@ input#sheetname {
     height: 28px;
     padding-left: 10px;
 }
+#content {
+    width: 100%;
+}

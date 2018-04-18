@@ -77,8 +77,8 @@ $name = getproperfullname($_SESSION['users_details']);
 		<h6>PRE-ENROLLMENT FORM</h6>
 		<div class="col-md-12">
 			<div class="inline name">
-				<p><span>Name: </span><strong><input type="text" name="name" class="input_types width-100p"></strong></p>
-				<p><span>Student Number: </span><strong><input type="text" name="sn-num" class="input_types"></strong></p>
+				<p><span>Name: </span><strong><input type="text" name="name"  value="<?php echo $name; ?>" class="input_types width-100p"></strong></p>
+				<p><span>Student Number: </span><strong><input type="text" name="sn-num" value="<?php echo $student_number; ?>" class="input_types"></strong></p>
 			</div>
 
 			<div class="inline fw_field">

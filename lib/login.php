@@ -1,5 +1,5 @@
 <?php 
-	
+
 include("XDLINE.php");
 $data = $_POST['data'];
 
@@ -8,7 +8,7 @@ if ($data['request_type'] == "request-login") {
 }else if($data['request_type'] == "request-generate-student"){
 	generateUser($data['studentNumber'], $data['validationNumber'], $data['confirmationPassword']);
 }else if($data['request_type'] == "request-confirm-student"){
-	createStudentAccount();
+	echo createStudentAccount() == "1" ? "SUCCESSFULLY GENERATED ACCOUNT" : "0";
 }else if ($data['request_type'] == "update-profile-picture") {
 	profilePicture($data['imageData']);
 }
@@ -59,22 +59,27 @@ function createStudentAccount(){
 	$password = $XDL->encrypt_password($_SESSION['newStudentAcc']['password']);
 	$validationNumber = $_SESSION['newStudentAcc']['validation'];
 
-	$addInUsers = $XDL->insert("users_table", array(
-				"username" => $studentNumber,
-				"password" => $password,
-				"account_type" => 'student'), "STUDENT: CREATED SUCCESSFULLY");
+	$stud_info = $XDL::select("student_number", "students_table", "student_number = $studentNumber")[0];
+	if($stud_info == ""):
+		$res = $XDL::insert("users_table", array(
+			'account_type' => 'student',
+			'username' => $studentNumber,
+			'password' => $password,
+		), "1", "0");
 
-	if ($addInUsers == "STUDENT: CREATED SUCCESSFULLY") {
-		$addInStudent = $XDL->insert("students_table", array(
-				"student_number" => $studentNumber,
-				"user_id" => "0",
-				"section_id" => "0",
-				"validation_number" => $validationNumber));
-
-		echo "SUCCESSFULLY GENERATED ACCOUNT";
-	}
-
+		if($res == "1"):
+			$uid = $XDL::select("MAX(user_id)", "users_table", "")[0]["MAX(user_id)"];
+			return $XDL::insert("students_table", array(
+				'student_number' => $studentNumber,
+				'user_id' => $uid,
+				'section_id' => 0,
+				'validation_number' => $validationNumber
+			), "1", "0");
+		endif;
+		return "0";
+	endif;
 }
+
 
 function profilePicture($imageLink){
 	session_start();
@@ -84,5 +89,5 @@ function profilePicture($imageLink){
 	file_put_contents($new, $data);
 
 }
-	
+
 ?>
