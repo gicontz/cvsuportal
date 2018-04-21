@@ -1,0 +1,48 @@
+{
+  "responseId": "eee4f34d-992e-4131-88dc-1e933bdc82f3",
+  "queryResult": {
+    "queryText": "tell me about you",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "Sorry, I didn't understand. I can tell you about Google's history, or its headquarters. Which one do you want to hear about?",
+    "fulfillmentMessages": [
+      {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "simpleResponses": {
+          "simpleResponses": [
+            {
+              "textToSpeech": "Sorry, I didn't understand. I can tell you about Google's history, or its headquarters. Which one do you want to hear about?"
+            }
+          ]
+        }
+      },
+      {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "suggestions": {
+          "suggestions": [
+            {
+              "title": "History"
+            },
+            {
+              "title": "Headquarters"
+            }
+          ]
+        }
+      },
+      {
+        "text": {
+          "text": [
+            "Sorry, I didn't understand. I can tell you about Google's history, or its headquarters. Which one do you want to hear about?"
+          ]
+        }
+      }
+    ],
+    "intent": {
+      "name": "projects/facts-about-you-360c8/agent/intents/f056c0d3-9b7c-40a3-96da-c74d79a5cec9",
+      "displayName": "In Dialog Fallback"
+    },
+    "intentDetectionConfidence": 1,
+    "diagnosticInfo": {},
+    "languageCode": "en"
+  }
+}
