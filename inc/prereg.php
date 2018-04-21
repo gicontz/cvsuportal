@@ -209,6 +209,6 @@ $name = getproperfullname($_SESSION['users_details']);
 <script type="text/javascript" src="js/table.js"></script>
 <script type="text/javascript">	
 	var percentageOfFailure = <?php echo $pof; ?>;
-	var max_units = percentageOfFailure <= 74 && percentageOfFailure <= 50 ? 15 : percentageOfFailure >= 75 ? 0 : 27;
+	var max_units = percentageOfFailure <= 74 && percentageOfFailure <= 50 && percentageOfFailure > 0 ? 15 : percentageOfFailure >= 75 ? 0 : 27;
 </script>
 <script type="text/javascript" src="js/prereg.js"></script>
