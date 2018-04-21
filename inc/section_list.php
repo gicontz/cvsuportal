@@ -11,15 +11,14 @@ $courses  = $subjectClass->showCourses("config.ini");
 	foreach($courses as $course){ ?>
 	<option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_main_title']; ?></option>            
 	<?php
-}
-?>        
+	}
+	?>        
 </select>
 </div>
 
 <div class="form-group">
 <select id="sections" class="form-control input-sm">
 	<option value="" default>Choose Section</option>
-
 </select>
 </div>
 

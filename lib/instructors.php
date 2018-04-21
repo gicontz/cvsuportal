@@ -31,4 +31,8 @@ class Instructor extends XDLINE{
 		$iid = $this->getInstructorId($userId, $configfile);
 		return parent::select("department_id", "dept_head_table", "instructor_id = $iid", $configfile)[0]["department_id"];
 	}
+
+	public function getInstructorNames($configfile){
+		return parent::select("user_id, first_name, last_name", "users_table", "`account_type` = 'instructor' OR `account_type` = 'deptchair'", $configfile);
+	}
 }
