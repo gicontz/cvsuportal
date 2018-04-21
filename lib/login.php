@@ -1,14 +1,14 @@
 <?php 
-
+	
 include("XDLINE.php");
 $data = $_POST['data'];
 
 if ($data['request_type'] == "request-login") {
 	login($data['username'], $data['password']);
 }else if($data['request_type'] == "request-generate-student"){
-	generateUser($data['studentNumber'], $data['validationNumber'], $data['confirmationPassword']);
+	generateUser($data['studentNumber'], $data['validationNumber'], $data['confirmationPassword'], $data);
 }else if($data['request_type'] == "request-confirm-student"){
-	echo createStudentAccount() == "1" ? "SUCCESSFULLY GENERATED ACCOUNT" : "0";
+	createStudentAccount();
 }else if ($data['request_type'] == "update-profile-picture") {
 	profilePicture($data['imageData']);
 }
@@ -29,7 +29,7 @@ function login($username, $password){
 	}
 };
 
-function generateUser($studentNumber, $validationNumber, $confirmationPassword){
+function generateUser($studentNumber, $validationNumber, $confirmationPassword, $dataArray){
 	session_start();
 	$XDLINE = "XDLINE";
 	$XDL = new $XDLINE;	
@@ -37,11 +37,23 @@ function generateUser($studentNumber, $validationNumber, $confirmationPassword){
 	$password = $XDL->encrypt_password($confirmationPassword);
 	$password2 = $_SESSION['users_details']['password'];
 
+	$course = $dataArray["std-course"];
+	$year = $dataArray["std-year"];
+	$section = $dataArray["std-section"];
+
+	$section = $XDLINE::select("*", "sections_table", "`course_id` = '$course' AND `year` = '$year' AND `section` = '$section'")[0];
 	$checkSN = $XDLINE::select("*", "students_table", "students_table.student_number = '$studentNumber'")[0];
 	if ($password == $password2) {
 		if ($checkSN == "") {
 			echo $generatedPassword;
-			$_SESSION['newStudentAcc'] = array("username"=>$studentNumber, "password"=>$generatedPassword, "validation"=> $validationNumber);
+			$_SESSION['newStudentAcc'] = array("username"=>$studentNumber, 
+											"password"=>$generatedPassword, 
+											"validation"=> $validationNumber,
+											"fname" => $dataArray["name-first"],
+											"mname" => $dataArray["name-middle"],
+											"lname" => $dataArray["name-last"],
+											"adviser" => $dataArray["adviser"],
+											"section" => $section['section_id']);
 		}else {
 			echo "STD NO. ALREADY EXIST";
 		}
@@ -58,28 +70,37 @@ function createStudentAccount(){
 	$studentNumber = $_SESSION['newStudentAcc']['username'];
 	$password = $XDL->encrypt_password($_SESSION['newStudentAcc']['password']);
 	$validationNumber = $_SESSION['newStudentAcc']['validation'];
+	$fname = $_SESSION['newStudentAcc']['fname'];
+	$mname = $_SESSION['newStudentAcc']['mname'];
+	$lname = $_SESSION['newStudentAcc']['lname'];
+	$section = $_SESSION['newStudentAcc']['section'];
+	$adviser = $_SESSION['newStudentAcc']['adviser'];
 
-	$stud_info = $XDL::select("student_number", "students_table", "student_number = $studentNumber")[0];
-	if($stud_info == ""):
-		$res = $XDL::insert("users_table", array(
-			'account_type' => 'student',
-			'username' => $studentNumber,
-			'password' => $password,
-		), "1", "0");
 
-		if($res == "1"):
-			$uid = $XDL::select("MAX(user_id)", "users_table", "")[0]["MAX(user_id)"];
-			return $XDL::insert("students_table", array(
-				'student_number' => $studentNumber,
-				'user_id' => $uid,
-				'section_id' => 0,
-				'validation_number' => $validationNumber
-			), "1", "0");
-		endif;
-		return "0";
-	endif;
+	
+
+	$addInUsers = $XDL->insert("users_table", array(
+				"username" => $studentNumber,
+				"password" => $password,
+				"account_type" => 'student',
+				"first_name" => $fname,
+				"last_name" => $lname,
+				"middle_name" => $mname), "STUDENT: CREATED SUCCESSFULLY");
+
+	$user = $XDLINE::select("`user_id`", "users_table", "`username` = '$studentNumber'")[0];
+
+	if ($addInUsers == "STUDENT: CREATED SUCCESSFULLY") {
+		$addInStudent = $XDL->insert("students_table", array(
+				"student_number" => $studentNumber,
+				"user_id" => $user['user_id'],
+				"section_id" => $section,
+				"validation_number" => $validationNumber,
+				"adviser_id" => $adviser));
+
+		echo "SUCCESSFULLY GENERATED ACCOUNT";
+	}
+
 }
-
 
 function profilePicture($imageLink){
 	session_start();
@@ -90,4 +111,5 @@ function profilePicture($imageLink){
 
 }
 
+	
 ?>
