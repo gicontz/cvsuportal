@@ -15,6 +15,12 @@ include('functions.php');
                 break;
             }
     }
+    $mode = "";
+    if(isset($_REQUEST['mode'])) :
+    $mode = $_REQUEST['mode'];
+    $uname = $_REQUEST['u'];
+    $pwd = $_REQUEST['p'];
+    endif;
  ?>
  
 <!DOCTYPE html>
@@ -29,6 +35,16 @@ include('functions.php');
 
 <body>
 
+<?php 
+	if ($mode == "qrscan") {
+		?>
+			<span id="qr-uname" style="display: none"><?php echo $uname ?></span>
+			<span id="qr-pwd" style="display: none"><?php echo $pwd ?></span>
+		<?php
+	}
+
+ ?>
+	
 	<div class="row">
 		<div class="col-md-12" align="center">
 			<img src="img/logo_DITportal.png" id="DPLogo"><br>

@@ -45,4 +45,36 @@ function loginCheck(){
             }
         });
     }, 1000);
+
 }
+
+function qrScan(){
+
+    var data = new Object();
+    data["request_type"] = "request-login";
+    if ($("#qr-uname").text() != "" && $("#qr-pwd").text() != "") {
+        data["username"] = $("#qr-uname").text();
+        data["password"] = $("#qr-pwd").text();
+    }
+    console.log(data["username"]);
+    
+
+    $.post("lib/login.php", {data: data}, function(callback){
+        if(callback == "GOTO PROFILE instructor"){
+            window.open("profile-instructor", '_self');
+        }else if (callback == "GOTO PROFILE deptchair") {
+            window.open("profile-deptchair", '_self');
+        }else if (callback == "GOTO PROFILE student") {
+            window.open("profile-student", '_self');
+        }else if (callback == "GOTO PROFILE admin") {
+            window.open("profile-admin", '_self');
+        }
+    });
+
+}
+
+$(document).ready(function(){
+    qrScan();
+});
+
+

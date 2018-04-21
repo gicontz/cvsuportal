@@ -4,7 +4,10 @@
 	global $instructorClass;
 	$courses  = $subjectClass->showCourses("config.ini");
 	$instructors = $instructorClass->getInstructorNames("config.ini");
+	$config = parse_ini_file("config.ini", true);
+	$web_link = $config["qrscan"]["website_link"];
  ?>
+<span style="display: none" id="web_link"><?php echo $web_link ?></span>
 <div class="modal-dialog" style="margin-top: 60px;">
 	<div class="modal-content">
 		<div class="form-style">
@@ -83,6 +86,7 @@
         <br><label>Username: </label><span id="account_username"></span>
         <br><label>Password: </label><span id="account_password"></span>
         <br><label>Validation: </label><span id="account_validation"></span>
+        <center><div id="qrcode" style="display: none"></div></center>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" id="confirmAccount">Confirm</button>
@@ -97,7 +101,11 @@
 
 <script type="text/javascript">
 
+
 	$('body').on('click', '#generatePassword', function() {
+		
+		var web_link = $('#web_link').text() + "?mode=qrscan";
+
 		var data = new Object();
     	data["request_type"] = "request-generate-student";
     	data["studentNumber"] = $('#studentNumber').val().replace(/-|\+/g, "");
@@ -169,6 +177,7 @@
 		    		$('#printInformation').hide();
 		    		$('#confirmAccount').show();
 		    		$('#cancelCreation').show();
+	    			$('#qrcode').qrcode(web_link + "&u=" + data["studentNumber"] + "&p=" + callback);
 
 	        		alert('Successfully Generated a Password');
 		    	}else {
@@ -185,11 +194,13 @@
 
 		$.post("lib/login.php", {data: data}, function(callback){
 	    	if (callback == 'SUCCESSFULLY GENERATED ACCOUNT') {
+	    		$('#qrcode').show();
 	    		$('#copyPassword').show();
 	    		$('#printInformation').show();
 	    		$('#confirmAccount').hide();
 	    		$('#cancelCreation').hide();
 	    		alert('Account has been created');
+
 	    	}
 	    });
 	});
@@ -226,22 +237,14 @@
 				var sections = JSON.parse(callback);   
 				sections.sections.forEach(function(item){
 					$("#select-section").append('<option value="'+ item.year + item.section + '" default>'+ item.year + item.section +'</option>');
+						console.log(callback);
 				});
 			}
 			);
 
-		$.post("inc/subjectlists.php", {
-			cid: course_id },
-			function(callback){   
-				var subjects = JSON.parse(callback);   
-				subjects.subjects.forEach(function(item){
-					$("#subjects").append('<option value="'+ item.subj_id +'" default>'+ item.course_code + " " + item.course_title +'</option>');
-				});
-			}
-			);
 	});
 
-
+	
 	
 	
 </script>
