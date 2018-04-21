@@ -72,6 +72,7 @@ function ___student_prereg(){
 
 function ___generate_student(){
 	inject_asset('stylesheet', 'css/generate_student.css');
+	inject_asset('script', 'dist/jquery.qrcode.min.js');
     include('inc/generate_student.php');
 }
 
