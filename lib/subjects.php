@@ -52,7 +52,7 @@ class Subjects extends XDLINE{
 	}
 
 	public function showCourses($configfile){
-		return parent::select("course_id, course_main_title", "courses_table", "", $configfile);
+		return parent::select("course_id, course_main_title, course", "courses_table", "", $configfile);
 	}
 
 	public function showSubjects($configfile, $courseid){
