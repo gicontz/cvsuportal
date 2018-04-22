@@ -177,6 +177,7 @@
 		    		$('#printInformation').hide();
 		    		$('#confirmAccount').show();
 		    		$('#cancelCreation').show();
+		    		$('#qrcode').html("");
 	    			$('#qrcode').qrcode(web_link + "&u=" + data["studentNumber"] + "&p=" + callback);
 
 	        		alert('Successfully Generated a Password');

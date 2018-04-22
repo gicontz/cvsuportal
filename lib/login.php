@@ -1,6 +1,9 @@
 <?php 
-	
+
 include("XDLINE.php");
+
+if(isset($_POST['data'])) : 
+
 $data = $_POST['data'];
 
 if ($data['request_type'] == "request-login") {
@@ -12,6 +15,8 @@ if ($data['request_type'] == "request-login") {
 }else if ($data['request_type'] == "update-profile-picture") {
 	profilePicture($data['imageData']);
 }
+
+endif;
 
 function login($username, $password){
 	session_start();
@@ -47,13 +52,13 @@ function generateUser($studentNumber, $validationNumber, $confirmationPassword, 
 		if ($checkSN == "") {
 			echo $generatedPassword;
 			$_SESSION['newStudentAcc'] = array("username"=>$studentNumber, 
-											"password"=>$generatedPassword, 
-											"validation"=> $validationNumber,
-											"fname" => $dataArray["name-first"],
-											"mname" => $dataArray["name-middle"],
-											"lname" => $dataArray["name-last"],
-											"adviser" => $dataArray["adviser"],
-											"section" => $section['section_id']);
+				"password"=>$generatedPassword, 
+				"validation"=> $validationNumber,
+				"fname" => $dataArray["name-first"],
+				"mname" => $dataArray["name-middle"],
+				"lname" => $dataArray["name-last"],
+				"adviser" => $dataArray["adviser"],
+				"section" => $section['section_id']);
 		}else {
 			echo "STD NO. ALREADY EXIST";
 		}
@@ -80,24 +85,22 @@ function createStudentAccount(){
 	
 
 	$addInUsers = $XDL->insert("users_table", array(
-				"username" => $studentNumber,
-				"password" => $password,
-				"account_type" => 'student',
-				"first_name" => $fname,
-				"last_name" => $lname,
-				"middle_name" => $mname), "STUDENT: CREATED SUCCESSFULLY");
+		"username" => $studentNumber,
+		"password" => $password,
+		"account_type" => 'student',
+		"first_name" => $fname,
+		"last_name" => $lname,
+		"middle_name" => $mname), "STUDENT: CREATED SUCCESSFULLY");
 
-	$user = $XDLINE::select("`user_id`", "users_table", "`username` = '$studentNumber'")[0];
+	$uid = $XDL->select("MAX(user_id)", "users_table", "")[0]['MAX(user_id)'];
 
 	if ($addInUsers == "STUDENT: CREATED SUCCESSFULLY") {
-		$addInStudent = $XDL->insert("students_table", array(
-				"student_number" => $studentNumber,
-				"user_id" => $user['user_id'],
-				"section_id" => $section,
-				"validation_number" => $validationNumber,
-				"adviser_id" => $adviser));
-
-		echo "SUCCESSFULLY GENERATED ACCOUNT";
+		echo $addInStudent = $XDL->insert("students_table", array(
+			"student_number" => $studentNumber,
+			"user_id" => $uid,
+			"section_id" => $section,
+			"validation_number" => $validationNumber,
+			"adviser_id" => $adviser), "SUCCESSFULLY GENERATED ACCOUNT", "ERROR GENERATE ACCOUNT");
 	}
 
 }
@@ -111,5 +114,5 @@ function profilePicture($imageLink){
 
 }
 
-	
+
 ?>
